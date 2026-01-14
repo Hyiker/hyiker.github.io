@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>离散数学期末复习 - 甲醛的小屋</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Carbene Hu"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Carbene Hu"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="由于离散数学期中过于拉跨，专门开贴记录相关知识点。 关系 三个定理  如果\(A_1\subseteq A_2\)则有\(R(A_1)\subset R(A_2)\) \(R(A_1\cup A_2)&amp;#x3D;R(A_1)\cup R(A_2)\) 重点： \(R(A_1\cap A_2)\subseteq R(A_1)\cap R(A_2)\)  整除关系 定义整除关系\(a|b\)为：\(a\)能整除"><meta property="og:type" content="blog"><meta property="og:title" content="离散数学期末复习"><meta property="og:url" content="https://hyiker.github.io/2020/12/26/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><meta property="og:site_name" content="甲醛的小屋"><meta property="og:description" content="由于离散数学期中过于拉跨，专门开贴记录相关知识点。 关系 三个定理  如果\(A_1\subseteq A_2\)则有\(R(A_1)\subset R(A_2)\) \(R(A_1\cup A_2)&amp;#x3D;R(A_1)\cup R(A_2)\) 重点： \(R(A_1\cap A_2)\subseteq R(A_1)\cap R(A_2)\)  整除关系 定义整除关系\(a|b\)为：\(a\)能整除"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://s3.ax1x.com/2020/12/26/rhtFQH.png"><meta property="og:image" content="https://s3.ax1x.com/2020/12/26/r4uKIJ.png"><meta property="article:published_time" content="2020-12-26T13:39:10.000Z"><meta property="article:modified_time" content="2026-01-14T11:16:13.164Z"><meta property="article:author" content="Carbene Hu"><meta property="article:tag" content="离散数学"><meta property="article:tag" content="期末"><meta property="article:tag" content="复习"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://s3.ax1x.com/2020/12/26/rhtFQH.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hyiker.github.io/2020/12/26/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"},"headline":"离散数学期末复习","image":["https://s3.ax1x.com/2020/12/26/rhtFQH.png","https://s3.ax1x.com/2020/12/26/r4uKIJ.png"],"datePublished":"2020-12-26T13:39:10.000Z","dateModified":"2026-01-14T11:16:13.164Z","author":{"@type":"Person","name":"Carbene Hu"},"publisher":{"@type":"Organization","name":"甲醛的小屋","logo":{"@type":"ImageObject","url":{"light":"https://s4.ax1x.com/2021/12/30/TR2810.png","dark":"https://s1.ax1x.com/2022/04/03/q7u93t.png"}}},"description":"由于离散数学期中过于拉跨，专门开贴记录相关知识点。 关系 三个定理  如果\\(A_1\\subseteq A_2\\)则有\\(R(A_1)\\subset R(A_2)\\) \\(R(A_1\\cup A_2)&#x3D;R(A_1)\\cup R(A_2)\\) 重点： \\(R(A_1\\cap A_2)\\subseteq R(A_1)\\cap R(A_2)\\)  整除关系 定义整除关系\\(a|b\\)为：\\(a\\)能整除"}</script><link rel="canonical" href="https://hyiker.github.io/2020/12/26/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/resources">Resources</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-12-26T13:39:10.000Z" title="12/26/2020, 1:39:10 PM">2020-12-26</time>发表</span><span class="level-item"><time dateTime="2026-01-14T11:16:13.164Z" title="1/14/2026, 11:16:13 AM">2026-01-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%80%83%E8%AF%95%E8%AE%B0%E5%BD%95/">考试记录</a></span><span class="level-item">10 分钟读完 (大约1465个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title title-prefix is-3 is-size-4-mobile">离散数学期末复习</h1><div class="content"><p>由于离散数学期中过于拉跨，专门开贴记录相关知识点。</p>
+<h3 id="关系">关系</h3>
+<p>三个定理</p>
+<ol type="1">
+<li>如果<span class="math inline">\(A_1\subseteq A_2\)</span>则有<span class="math inline">\(R(A_1)\subset R(A_2)\)</span></li>
+<li><span class="math inline">\(R(A_1\cup A_2)=R(A_1)\cup R(A_2)\)</span></li>
+<li><strong><em>重点：</em></strong> <span class="math inline">\(R(A_1\cap A_2)\subseteq R(A_1)\cap R(A_2)\)</span></li>
+</ol>
+<p><strong>整除关系</strong> 定义整除关系<span class="math inline">\(a|b\)</span>为：<span class="math inline">\(a\)</span>能整除<span class="math inline">\(b\)</span>，如<span class="math inline">\(3|6\)</span>，画哈塞图表示（哈塞图无向），则为上面为被整除的数，下面为除数。对于定义在集合<span class="math inline">\(A=\{1,3,6,9,15,45\}\)</span>上的哈塞图如下：</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rhtFQH"><img src="https://s3.ax1x.com/2020/12/26/rhtFQH.png" alt="rhtFQH.png" /></a></p>
+<p>在期中考试中错的很重一点是，对于偏序关系的大于、小于、上确界、下确界、极大值、极小值不清楚，那么对于偏序集合<span class="math inline">\((A,|)\)</span></p>
+<p><strong>覆盖关系(&lt;)</strong> <span class="math inline">\(a|b \rightarrow a&lt;b\)</span></p>
+<p><strong>上确界(最小上界)</strong> 针对一个子集，对于一个集合<span class="math inline">\(A\)</span>的子集<span class="math inline">\(B=\{1,3,9\}\)</span>，若在<span class="math inline">\(A\)</span>中能找到一个元素<span class="math inline">\(a\)</span>，使得<span class="math inline">\(\forall b\in B\rightarrow b&lt;a\)</span>，且<span class="math inline">\(a\)</span>小于其他所有的上界，本条件下，最小上界<span class="math inline">\(LUB(B)=9\)</span></p>
+<p><strong>下确界（最大下界）</strong> 同理于上确界，<span class="math inline">\(GLB(B)=1\)</span></p>
+<p><strong>极大值、最大值</strong> <strong>极大值</strong>为<strong><em>不小于</em></strong>其他任何元素的元素，可以有多个；<strong>最大值</strong>为<strong><em>大于</em></strong>其他任何元素的元素，只能有一个或者不存在。对于<span class="math inline">\(A\)</span>，极大值为<span class="math inline">\(6,45\)</span>，最大值不存在。</p>
+<h4 id="格">格</h4>
+<p>偏序集中任意两个元素组成的集合均存在最小上界和最大下界的偏序集合称作一个格</p>
+<hr />
+<h3 id="群">群</h3>
+<p>四个渐进关系</p>
+<table>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th style="text-align: center;">运算封闭</th>
+<th style="text-align: center;">结合律</th>
+<th style="text-align: center;">单位元</th>
+<th style="text-align: center;">逆元</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>广群 groupoid</strong></td>
+<td style="text-align: center;">√</td>
+<td style="text-align: center;">×</td>
+<td style="text-align: center;">×</td>
+<td style="text-align: center;">×</td>
+</tr>
+<tr class="even">
+<td><strong>半群 semigroup</strong></td>
+<td style="text-align: center;">√</td>
+<td style="text-align: center;">√</td>
+<td style="text-align: center;">×</td>
+<td style="text-align: center;">×</td>
+</tr>
+<tr class="odd">
+<td><strong>含幺半群 monoid</strong></td>
+<td style="text-align: center;">√</td>
+<td style="text-align: center;">√</td>
+<td style="text-align: center;">√</td>
+<td style="text-align: center;">×</td>
+</tr>
+<tr class="even">
+<td><strong>群 group</strong></td>
+<td style="text-align: center;">√</td>
+<td style="text-align: center;">√</td>
+<td style="text-align: center;">√</td>
+<td style="text-align: center;">√</td>
+</tr>
+</tbody>
+</table>
+<p><strong>自由半群</strong> 群元素为字母表，运算为连接两个元素</p>
+<h4 id="子群">子群</h4>
+<p><strong>子代数</strong> 对于群<span class="math inline">\(G\)</span>，<span class="math inline">\(H\)</span>为<span class="math inline">\(G\)</span>的子群，当且仅当<span class="math inline">\(\forall a,b\in H\rightarrow a^{-1}b\in H\)</span>。</p>
+<p><strong>乘积代数</strong> 半群<span class="math inline">\((S,*)\)</span>和<span class="math inline">\((T,*&#39;)\)</span>，定义新的半群<span class="math inline">\((S\times T,*&#39;&#39;)\)</span>，其中运算 <span class="math inline">\(*&#39;&#39;\)</span> 为 <span class="math display">\[(s_1, t_1)*&#39;&#39;(s_2, t_2)=(s_1*s_2, t_1*&#39;t_2)\]</span> 则<span class="math inline">\(S\times T\)</span>中的元素为<span class="math inline">\(S\)</span>、<span class="math inline">\(T\)</span>中元素组合后得到的二元组合<span class="math inline">\((s,t)\)</span></p>
+<h5 id="商代数">商代数</h5>
+<p><strong>同余关系</strong> 对于广群 <span class="math inline">\((S, *)\)</span> 有关系 <span class="math inline">\(R\)</span> 为同余关系，当且仅当 <span class="math inline">\(aRa&#39;\wedge bRb&#39;\rightarrow (a*b)R(a&#39;*b&#39;)\)</span> PS：同余关系必定为一个等价关系，即满足自反、对称、传递。</p>
+<p><strong>商广群</strong> 由于同余关系将原广群划分为了多个不同的广群，因此我们称这样的划分得到的群为商广群 <span class="math inline">\(G/R\)</span>，群的元素为划分得到的等价类。</p>
+<hr />
+<h4 id="同态同构">同态&amp;同构</h4>
+<p>对于广群<span class="math inline">\((S,*)\)</span>、<span class="math inline">\((T,*&#39;)\)</span> ，有<span class="math inline">\(f(s_1*s_2)=f(s_1)*&#39;f(s_2)\)</span>若</p>
+<ol type="1">
+<li>对于<span class="math inline">\(s_1,s_2\in S\)</span>均成立，则称<span class="math inline">\(f\)</span>为一个<strong>同态 (homomorphism) 映射</strong></li>
+<li>满足第一点且<span class="math inline">\(f\)</span>为一个双射（同时单射和满射），则<span class="math inline">\(f\)</span>为一个<strong>同构 (isomorphism) 映射</strong>。</li>
+</ol>
+<p><strong>满同态定理</strong> 对于满同态映射<span class="math inline">\(f: S\rightarrow T\)</span>，定义关系<span class="math inline">\(R: aRb \rightarrow f(a)=(b)\)</span>，则有：</p>
+<ol type="1">
+<li><span class="math inline">\(R\)</span>为一个同余关系。</li>
+<li><span class="math inline">\(g:S/R\rightarrow T\)</span> 为一个同构关系。即 <span class="math inline">\(R\)</span> 对 <span class="math inline">\(S\)</span> 的划分得到的等价类的集合和 <span class="math inline">\(T\)</span> 中元素满足一对一映射关系。</li>
+</ol>
+<h3 id="图">图</h3>
+<p><strong>匹配</strong> 指边的子集中，两两顶点互不相同的集合。</p>
+<ul>
+<li>最大匹配：边数最多的匹配集合</li>
+<li>完备匹配：能将二部图<span class="math inline">\((V_1,V_2), (V_1\cup V_2=V)\)</span>中的所有顶点都匹配起来的匹配</li>
+</ul>
+<h4 id="图同构">图同构</h4>
+<p>两个图只有顶点的名字不同，其他完全相同。</p>
+<ul>
+<li>必要不充分条件：两个图的<strong>图形不变量</strong>相同</li>
+</ul>
+<h3 id="通路与回路">通路与回路</h3>
+<p><strong>连通图</strong> 仅针对无向图，如果无向图中的点两两连通，则说这个图是连通图。</p>
+<p><strong>强连通、弱连通</strong> 仅针对有向图，如果有向图中的点两两连通，则说这个图是强连通图；如果这个有向图不连通，但是与其对应的无向图连通，我们称这个图是弱连通的。</p>
+<h4 id="欧拉路径回路">欧拉路径/回路</h4>
+<p><strong>欧拉路径</strong> 包含所有边的一条通路</p>
+<p><strong>欧拉回路</strong> 包含所有边的一条回路</p>
+<p>首先图必须要连通，然后</p>
+<ul>
+<li>连通多重图有欧拉回路 <span class="math inline">\(\leftrightarrow\)</span> 顶点度数均为偶数</li>
+<li>联通多重图有欧拉路径 <span class="math inline">\(\leftrightarrow\)</span> 仅有两个度为奇数的顶点。</li>
+</ul>
+<p><strong>使用 Fleury 算法构造欧拉路径</strong> 每次添加一条连接上一个选择的到的顶点，且不为<strong>割边（去掉后使得图不连通）</strong>的边，直到所有边都被添加。</p>
+<h4 id="哈密尔顿通路回路">哈密尔顿通路/回路</h4>
+<p>没有充要条件，pass</p>
+<h3 id="平面图以及着色">平面图以及着色</h3>
+<p><strong>欧拉定理</strong> 对于连通的<strong>平面</strong>图，有<span class="math inline">\(r=e-v+2\)</span>，其中，<span class="math inline">\(r\)</span> 为由边划分得到的区域数量。</p>
+<ul>
+<li>如果是有<span class="math inline">\(k\)</span>个连通分量的平面图，则<span class="math inline">\(r=k+e-v+1\)</span></li>
+<li>有<span class="math inline">\(n\)</span>个顶点连通平面简单图<span class="math inline">\(G\)</span>，有<span class="math inline">\(e\le 3n-6\)</span></li>
+<li>对于连通平面简单图，且<span class="math inline">\(v\ge3\)</span>、没有长度为 3 的回路，则有<span class="math inline">\(e\le 2v-4\)</span></li>
+</ul>
+<p><strong>Kuratowski 定理</strong> 一个图是平面图当且仅当它不含有任何可以通过<span class="math inline">\(K_5\)</span>和<span class="math inline">\(K_{3,3}\)</span>换点（将顶点换成边）得到的子图如下图。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r4uKIJ"><img src="https://s3.ax1x.com/2020/12/26/r4uKIJ.png" alt="r4uKIJ.png" /></a></p>
+<p><strong>图的着色</strong> 所有平面图都可以用五种颜色着色</p>
+<p>有两种方法可以算出着色数，分别是朴素的算法以及着色多项式。</p>
+<h3 id="生成函数">生成函数</h3>
+<p>一张表，慢慢背 ⑧</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>离散数学期末复习</p><p><a href="https://hyiker.github.io/2020/12/26/离散数学期末复习/">https://hyiker.github.io/2020/12/26/离散数学期末复习/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Carbene Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-12-26</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-01-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%9C%9F%E6%9C%AB/">期末</a><a class="link-muted mr-2" rel="tag" href="/tags/%E5%A4%8D%E4%B9%A0/">复习</a></div><!--!--></article></div><!--!--><div class="card"><nav class="post-navigation mt-4 level is-mobile card-content"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/12/27/%E8%BF%90%E7%AD%B9%E5%AD%A6%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">运筹学期末复习</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/12/24/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><span class="level-item">概率论与数理统计期末复习</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content" id="valine-thread"></div><script src="//cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread',
+            appId: "r0qA9mbjz4lWX92StwtatUSd-gzGzoHsz",
+            appKey: "eqbjaQHLLgk5yUvAwzm7cFVn",
+            placeholder: "来留言⑧~",
+            
+            avatarForce: false,
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            lang: "zh-CN",
+            visitor: false,
+            highlight: true,
+            recordIP: false,
+            
+            
+            
+            enableQQ: false,
+            requiredFields: [],
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://pic.carbene.cc/i/2024/01/23/65af808bd5f80.webp" alt="Carbene Hu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Carbene Hu</p><p class="is-size-6 is-block">An ordinary guy</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">38</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">66</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Hyiker" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Zhihu" href="https://www.zhihu.com/people/sidice-24"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Academic" href="https://chonghao.carbene.cc"><i class="fas fa-graduation-cap"></i></a></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://wadechiang.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">WadeChiang</span></span><span class="level-right"><span class="level-item tag">wadechiang.github.io</span></span></a></li><li><a class="level is-mobile" href="https://clslaid.icu/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">CL</span></span><span class="level-right"><span class="level-item tag">clslaid.icu</span></span></a></li><li><a class="level is-mobile" href="https://ayamir.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Ayamir</span></span><span class="level-right"><span class="level-item tag">ayamir.github.io</span></span></a></li><li><a class="level is-mobile" href="https://leeshy-tech.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">LeeShy</span></span><span class="level-right"><span class="level-item tag">leeshy-tech.github.io</span></span></a></li><li><a class="level is-mobile" href="https://maxlinn.site/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Maxlinn</span></span><span class="level-right"><span class="level-item tag">maxlinn.site</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2026/01/"><span class="level-start"><span class="level-item">一月 2026</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/12/"><span class="level-start"><span class="level-item">十二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/11/"><span class="level-start"><span class="level-item">十一月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/10/"><span class="level-start"><span class="level-item">十月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/06/"><span class="level-start"><span class="level-item">六月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/05/"><span class="level-start"><span class="level-item">五月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/01/"><span class="level-start"><span class="level-item">一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">八月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div></div><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><!--!--></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a><p class="is-size-7"><span>&copy; 2026 Carbene Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/analytics.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script type="text/javascript" src="/js/imaegoo/universe.js"></script></body></html>

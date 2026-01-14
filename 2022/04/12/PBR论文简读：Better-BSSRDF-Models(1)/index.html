@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>PBR论文简读：Better BSSRDF Models(1) - 甲醛的小屋</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Carbene Hu"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Carbene Hu"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="导语 在上一篇简读论文：PBR论文简读：A Practical Model for Subsurface Light Transport（后文将以Basic BSSRDF模型来指代本文提出的模型）提出BSSRDF模型后，人们陆陆续续发现了模型中的很多不足与需要改进的地方，因此接下来几篇blog将会简读几篇关于Basic BSSRDF模型的改进方法相关的论文。 Light Diffusion in"><meta property="og:type" content="blog"><meta property="og:title" content="PBR论文简读：Better BSSRDF Models(1)"><meta property="og:url" content="https://hyiker.github.io/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/"><meta property="og:site_name" content="甲醛的小屋"><meta property="og:description" content="导语 在上一篇简读论文：PBR论文简读：A Practical Model for Subsurface Light Transport（后文将以Basic BSSRDF模型来指代本文提出的模型）提出BSSRDF模型后，人们陆陆续续发现了模型中的很多不足与需要改进的地方，因此接下来几篇blog将会简读几篇关于Basic BSSRDF模型的改进方法相关的论文。 Light Diffusion in"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://hyiker.github.io/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/blender_bssrdf.jpeg"><meta property="article:published_time" content="2022-04-12T22:47:32.000Z"><meta property="article:modified_time" content="2026-01-14T11:16:13.126Z"><meta property="article:author" content="Carbene Hu"><meta property="article:tag" content="PBR"><meta property="article:tag" content="论文阅读"><meta property="article:tag" content="离线渲染"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://hyiker.github.io/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/blender_bssrdf.jpeg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hyiker.github.io/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/"},"headline":"PBR论文简读：Better BSSRDF Models(1)","image":[],"datePublished":"2022-04-12T22:47:32.000Z","dateModified":"2026-01-14T11:16:13.126Z","author":{"@type":"Person","name":"Carbene Hu"},"publisher":{"@type":"Organization","name":"甲醛的小屋","logo":{"@type":"ImageObject","url":{"light":"https://s4.ax1x.com/2021/12/30/TR2810.png","dark":"https://s1.ax1x.com/2022/04/03/q7u93t.png"}}},"description":"导语 在上一篇简读论文：PBR论文简读：A Practical Model for Subsurface Light Transport（后文将以Basic BSSRDF模型来指代本文提出的模型）提出BSSRDF模型后，人们陆陆续续发现了模型中的很多不足与需要改进的地方，因此接下来几篇blog将会简读几篇关于Basic BSSRDF模型的改进方法相关的论文。 Light Diffusion in"}</script><link rel="canonical" href="https://hyiker.github.io/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/resources">Resources</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/blender_bssrdf.jpeg" alt="PBR论文简读：Better BSSRDF Models(1)"></span></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-04-12T22:47:32.000Z" title="4/12/2022, 10:47:32 PM">2022-04-12</time>发表</span><span class="level-item"><time dateTime="2026-01-14T11:16:13.126Z" title="1/14/2026, 11:16:13 AM">2026-01-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a><span> / </span><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/PBR/">PBR</a></span><span class="level-item">39 分钟读完 (大约5903个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title title-prefix is-3 is-size-4-mobile">PBR论文简读：Better BSSRDF Models(1)</h1><div class="content"><h2 id="导语">导语</h2>
+<p>在上一篇简读论文：<a href="/2022/04/09/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9AA-Practical-Model-for-Subsurface-Light-Transport/" title="PBR论文简读：A Practical Model for Subsurface Light Transport">PBR论文简读：A Practical Model for Subsurface Light Transport</a>（后文将以Basic BSSRDF模型来指代本文提出的模型）提出BSSRDF模型后，人们陆陆续续发现了模型中的很多不足与需要改进的地方，因此接下来几篇blog将会简读几篇关于Basic BSSRDF模型的改进方法相关的论文。</p>
+<h2 id="light-diffusion-in-multi-layered-translucent-materials-donner05">Light Diffusion in Multi-Layered Translucent Materials, Donner'05</h2>
+<p>这篇论文主要指出了Basic BSSRDF中没有考虑到<strong>薄介质</strong>、<strong>多层</strong>、<strong>粗糙接触面</strong>的非理想情形下的问题，提出了多层（Multi-Layered）的BSSRDF模型。</p>
+<h3 id="薄介质散射">薄介质散射</h3>
+<p>Basic BSSRDF中假设散射介质是半无限大的，但是对于介质厚度小到一定程度的时候（如，薄纸、树叶），显然这个假设是不成立的，同时光的出射部分能量就被忽视了，于是本文提出将光线能量划分为上表面的反射Reflectance <span class="math inline">\(R(r)\)</span>和下表面的出射Transmittance <span class="math inline">\(T(r)\)</span>两个部分，同时，偶极子需要应该满足分别在上下两个表面的的irradiance都为0：</p>
+<center>
+<img src="/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/mdp.png" class="">
+</center>
+<p><span class="math display">\[\int_{\Omega+} L_{d}(r, \vec{\omega})(-\vec{n} \cdot \vec{\omega}) d \vec{\omega}=F_{d r} \int_{\Omega-} L_{d}(r, \vec{\omega})(\vec{n} \cdot \vec{\omega}) d \vec{\omega} \quad \text { at } z=0 \tag{1}\]</span></p>
+<p><span class="math display">\[\int_{\Omega-} L_{d}(r, \vec{\omega})(\vec{n} \cdot \vec{\omega}) d \vec{\omega}=F_{d r} \int_{\Omega+} L_{d}(r, \vec{\omega})(-\vec{n} \cdot \vec{\omega}) d \vec{\omega} \quad \text { at } z=d\]</span></p>
+<p>其中第一个式子是Basic BSSRDF中满足的边界条件，第二个式子是本文提出下半边界应该满足的条件。同样的可以根据第二个式子推出：</p>
+<p><span class="math display">\[\phi(r)+2 A D \frac{\partial \phi(r)}{\partial z}=0 \quad \text { at } z=d\]</span></p>
+<p>但是有一个问题：偶极子模型使用的两个极子只能使得一侧的irradiance和为零，如果在另一侧加上一个负偶极子来保持下半侧的平衡，那么上半侧的平衡又会被破坏，因此只有在有无限个对称偶极子的情况下，irradiance和为0的条件才可能成立（如上图2）。以上半表面为0点，向下为正方向建立z轴，每一对偶极子交替关于<span class="math inline">\(z = z_b\)</span>和<span class="math inline">\(z = z_b+d\)</span>对称，可以得出每个正极子和负极子的z坐标表达式：</p>
+<p><span class="math display">\[\begin{aligned}
+&amp;z_{r, i}=2 i\left(d+2 z_{b}\right)+\ell \\
+&amp;z_{v, i}=2 i\left(d+2 z_{b}\right)-\ell-2 z_{b}, i=-n, \ldots, n,
+\end{aligned}\]</span></p>
+<p>2n+1个极子对于Reflectance和Transmittance的贡献就是直接对其各自贡献的求和，其中Transmittance如下：</p>
+<p><span class="math display">\[\begin{array}{r}
+T(r)=\sum_{i=-n}^{n} \frac{\alpha^{\prime}\left(d-z_{r, i}\right)\left(1+\sigma_{t r} d_{r, i}\right) e^{-\sigma_{t r} d_{r, i}}}{4 \pi d_{r, i}^{3}}- \\
+\frac{\alpha^{\prime}\left(d-z_{v, i}\right)\left(1+\sigma_{t r} d_{v, i}\right) e^{-\sigma_{t r} d_{v, i}}}{4 \pi d_{v, i}^{3}} .
+\end{array}\]</span></p>
+<p>同样的，上面的情况只讨论了薄板两边出射介质IOR相同的情况，实际情况下，两种介质的IOR往往是不同的（人类皮肤的表皮层的上侧为油脂，而下侧为真皮），这种情况下，体现在公式中不同的地方就在于菲涅尔反射项<span class="math inline">\(A = \frac{1 + F_{dr}}{1 - F_{dr}}\)</span>，同时也会导致极子坐标中的<span class="math inline">\(z_b\)</span>项出现变化，解决方法也很简单，使用正确的上下表面<span class="math inline">\(A\)</span>代入计算即可。</p>
+<p><span class="math display">\[\begin{aligned}
+&amp;\phi(r)-2 A(0) D \frac{\partial \phi(r)}{\partial z}=0, \quad \text { at } z=0 \\
+&amp;\phi(r)+2 A(d) D \frac{\partial \phi(r)}{\partial z}=0, \quad \text { at } z=d
+\end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}
+z_{r, i} &amp;=2 i\left(d+z_{b}(0)+z_{b}(d)\right)+\ell \\
+z_{v, i} &amp;=2 i\left(d+z_{b}(0)+z_{b}(d)\right)-\ell-2 z_{b}(0)
+\end{aligned}\]</span></p>
+<h3 id="多层材料的光扩散">多层材料的光扩散</h3>
+<p>接下来就可以通过上面的结论推导出多层材料的扩散效应了：将每层材料都看作一个薄板，以上一个薄板的出射作为下一层的入射来进行计算。论文里提出的具体方法是对入射通量<span class="math inline">\(\Phi\)</span>和Transmittance分布<span class="math inline">\(T\)</span>在表面上做卷积：</p>
+<p><span class="math display">\[M(r)=\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \Phi\left(x^{\prime}, y^{\prime}, \vec{\omega}\right) T\left(r^{\prime \prime}\right) d x^{\prime} d y^{\prime}=\Phi(x, y, \vec{\omega}) * T(r)\]</span></p>
+<p>对于两层的材料，论文假设光在两种材料中的所有行为都是由于多重散射产生的，而这个假设在每个层都满足扩散理论的情况下都相当准确，于是对每一层的<span class="math inline">\(M\)</span>计算就简化成了计算所有层的<span class="math inline">\(T\)</span>，同样的，计算总体的Transmittance分布的方法依然是对两种材料的<span class="math inline">\(T\)</span>做卷积：</p>
+<p><span class="math display">\[T_{12}(r)=\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} T_{1}\left(r^{\prime}\right) T_{2}\left(r^{\prime \prime}\right) d x^{\prime} d y^{\prime}=T_{1}(r) * T_{2}(r)\]</span></p>
+<p>但是这个公式代表着假设第一层传输到第二层材料的光只在第二层材料中传输，但是实际情况下光线于可能会在两种材料中来回弹射、散射，为了补偿这些行为，论文提出了如下的公式：</p>
+<p><span class="math display">\[T_{12}=T_{1} * T_{2}+T_{1} * R_{2} * R_{1} * T_{2}+T_{1} * R_{2} * R_{1} * R_{2} * R_{1} * T_{2}+\ldots\]</span></p>
+<p>但是如果直接用卷积硬算的话负担会很大，因此可以巧妙地利用傅立叶变换，将函数的卷积变成频域函数的乘积：</p>
+<p><span class="math display">\[\begin{aligned}
+\mathcal{T}_{12} &amp;=\mathcal{T}_{1} \mathcal{T}_{2}+\mathcal{T}_{1} \mathcal{R}_{2} \mathcal{R}_{1} \mathcal{T}_{2}+\mathcal{T}_{1} \mathcal{R}_{2} \mathcal{R}_{1} \mathcal{R}_{2} \mathcal{R}_{1} \mathcal{T}_{2}+\ldots \\
+&amp;=\mathcal{T}_{1} \mathcal{T}_{2}\left(1+\mathcal{R}_{2} \mathcal{R}_{1}+\left(\mathcal{R}_{2} \mathcal{R}_{1}\right)^{2}+\left(\mathcal{R}_{2} \mathcal{R}_{1}\right)^{3}+\ldots\right)
+\end{aligned} \tag{2}\]</span></p>
+<p>然后发现下面的式子其实是一个几何数列（等比数列），写出求和式，简化后有</p>
+<p><span class="math display">\[\mathcal{J}_{12}=\frac{\mathcal{T}_{1} \mathcal{J}_{2}}{1-\mathcal{R}_{2} \mathcal{R}_{1}}\]</span></p>
+<p><span class="math display">\[\mathcal{R}_{12}=\mathcal{R}_{1}+\frac{\mathcal{T}_{1} \mathcal{R}_{2} \mathcal{T}_{1}}{1-\mathcal{R}_{2} \mathcal{R}_{1}}\]</span></p>
+<p>这是双层的情况，多层的呢？很简单，只需要递归地把两层合并为一层的结果带入新的求解式即可！这样我们就可以求解任意层数的Transmittance和Reflectance系数了。</p>
+<h3 id="粗糙表面">粗糙表面</h3>
+<p>前文提到过，Basic BSSRDF要求表面是平滑的，那非理想情况下的粗糙表面呢。观察原式(1)，我们需要做的是在计算表面irradiance为0的时候，不仅仅考虑由于菲涅尔系数导致的影响，而是应该将其视为一个完整的BRDF反射，比如论文中就引入了Cook-Torrance BRDF：<span class="math inline">\(f_{r}\left(x, \vec{\omega}_{o}, \vec{\omega}_{i}\right)=\frac{D\left(x, \vec{\omega}_{o}, \vec{\omega}_{i}\right) G\left(x, \vec{\omega}_{o}, \vec{\omega}_{i}\right) F\left(x, \vec{\omega}_{i}, \vec{\omega}_{o}\right)}{4\left(\vec{\omega}_{i} \cdot \vec{n}\right)\left(\vec{\omega}_{o} \cdot \vec{n}\right)}\)</span>，然后计算新的<span class="math inline">\(\rho_d\)</span>替换<span class="math inline">\(F_{dr}\)</span>（这里就无法使用解析式来近似了，论文里使用了预计算蒙特卡洛采样来得到数值解），同样的，<span class="math inline">\(A\)</span>项也需要因此重新计算：<span class="math inline">\(A=\frac{1+\rho_{d}}{1-\rho_{d}}\)</span>，最后把漫射传播方程中的菲涅尔传输系数更改为BRDF传输系数（论文假定了光线仅进行传输和反射两种行为，并且使用了一个参数为<span class="math inline">\(\omega_o\)</span>的预计算表来插值计算<span class="math inline">\(\rho_{dt}\)</span>）：</p>
+<p><span class="math display">\[\rho_{d t}\left(x, \vec{\omega}_{o}\right)=1.0-\int_{2 \pi} f_{r}\left(x, \vec{\omega}_{o}, \vec{\omega}_{i}\right)\left(\vec{\omega}_{i} \cdot \vec{n}\right) d \vec{\omega}_{i}\]</span></p>
+<p>论文还提出了虽然对于简单几何，直接使用Reflectance的分布就可以搞定，但是对于复杂并且很薄的几何，应该使用<span class="math inline">\(R\)</span>和<span class="math inline">\(T\)</span>复合的分布计算（即对于着色点和光线入射点的法线进行点乘，如果两者同向说明反射的占比居多，两者偏离越多说明透射占比越多）：</p>
+<p><span class="math display">\[P_{d}(r)=\frac{1}{2}\left(\vec{n}_{s} \cdot \vec{n}_{l}+1\right) R_{d}(r)+\frac{1}{2}\left(1-\vec{n}_{s} \cdot \vec{n}_{l}\right) T_{d}(r)\]</span></p>
+<p>最后论文还描述了关于多层texture的做法，对于一张根据观测所得的贴图：</p>
+<ul>
+<li>使用反射分布对纹理进行卷积（根据光在材质中的漫射对纹理进行模糊）</li>
+<li>将纹理归一化（注：这里的归一化是指用这个像素的颜色去除以贴图所有像素的平均值），排除表面自带的BSSRDF影响</li>
+<li>最后，在渲染的时候通过归一化的纹理值来放缩辐射发射率</li>
+</ul>
+<h2 id="a-quantized-diffusion-model-for-rendering-translucent-materials-deon11">A Quantized-Diffusion Model for Rendering Translucent Materials, d'Eon'11</h2>
+<h3 id="前言">前言</h3>
+<p>这篇文章的方法和物理相关性有点高，而且内容对于我一个cs学生来说有点抽象……花了很长时间才看完，如果总结的有什么不对的地方，希望读者不吝赐教。</p>
+<p>这篇论文指出了Basic BSSRDF模型在<strong>经典散射理论(Classic Diffusion Theory)</strong>下对于<strong>高吸收率材料</strong>、<strong>近照明点</strong>模拟不足的缺陷，以及多偶极子理论在<strong>超薄材料层</strong>、<strong>高频照明</strong>情况下缺陷。提出了全新的<strong>量化漫射理论</strong>，同时为高斯和BSSRDF提供了可变精度的构造方法。</p>
+<h3 id="问题与改进方法">问题与改进方法</h3>
+<p>根据传统的方法，我们会使用球面谐波函数来对传播方程进行截断展开（前几篇论文中一般选择将其阶段至N=1，一开始我并不理解这个展开，通过和研究生学长的讨论大概明白了，由于辐射传播方程需要通过球面所有方向到该位置的积分来得到irradiance的值，通过低阶的SH展开，去掉高频信息保留低频信息，看作辐射在体积内各向同性传递），然后选择各向同性的张量通量来产生经典漫射系数（个人不太懂这段叙述），这两步看起来确实有点过于“随意”了，因此许多重要的改进方法都是基于这两个步骤提出的。</p>
+<p>对于经典漫射结果在高吸收率和近距离光源不准的情况下，论文引用了一个更好的<strong>Grosjean近似</strong>，这是一个fluence的近似解析解：</p>
+<p><span class="math display">\[
+\phi(r)=\frac{\mathrm{e}^{-\mu_{t}^{\prime} r}}{4 \pi r^{2}}+\frac{1}{4 \pi} \frac{3 \mu_{s}^{\prime} \mu_{t}^{\prime}}{2 \mu_{a}+\mu_{s}^{\prime}} \frac{\mathrm{e}^{-\sqrt{\frac{\mu_{a}}{D} r}}}{r} \tag{1}
+\]</span> 其中 <span class="math display">\[
+D=\frac{2 \mu_{a}+\mu_{s}^{\prime}}{3\left(\mu_{a}+\mu_{s}^{\prime}\right)^{2}}
+\]</span></p>
+<p>满足新的散射方程：</p>
+<p><span class="math display">\[-D \nabla^{2} \phi(\vec{x})+\mu_{a} \phi(\vec{x})=\alpha^{\prime} Q(\vec{x})\]</span></p>
+<p>同时这个近似还更好地分开了single scattering和multiple scattering，降低了经典漫射模型中的误差。相较于真正的解 <span class="math inline">\(\phi(r)=\frac{\mathrm{e}^{-\mu_{t} r}}{4 \pi r^{2}}+\frac{\mu_{s}}{2 \pi^{2} r} \int_{0}^{\infty} \frac{\arctan ^{2} u}{u-\alpha \arctan u} \sin \left(r \mu_{t} u\right) d u\)</span>，Grosjean近似有相近的形式和相同的零阶矩，满足：</p>
+<p><span class="math display">\[\int_{0}^{\infty} 4 \pi r^{2} \phi(r) d r=\frac{1}{\mu_{a}}\]</span></p>
+<h3 id="边界条件">边界条件</h3>
+<p>之前提到过的<span class="math inline">\(z_b = 2AD\)</span>，使用新的<span class="math inline">\(A(\eta)=\frac{1+3 C_{2}}{1-2 C_{1}}\)</span>，其中</p>
+<p><span class="math display">\[C_{i}=\int_{0}^{\pi / 2} F_{r}(\eta, \theta) \cos ^{i}(\theta) \sin (\theta) d \theta\]</span></p>
+<p>然后论文给出了<span class="math inline">\(C_1\)</span>和<span class="math inline">\(C_2\)</span><del>诡异</del>的多项式近似，这里就不贴出来了。</p>
+<p>前两篇论文提出使用偶极子/多极子的方法来求解边界条件，但是对于过于薄的材料，这两种方法都会受到限制：第一个正极子会被放置在薄板的下方：</p>
+<center>
+<img src="/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/cmb.png" class="">
+</center>
+<p>同时，由于可能的表面细节或者阴影造成的高频光线会因为偶极子的方法被强制地各向同性散射，这样会导致返回表面的散射光被过度模糊化、失去高频信息。</p>
+<h3 id="拓展源-漫射模型">拓展源 漫射模型</h3>
+<p>论文中引用了探照灯问题的一个解法：拓展源函数，即在深度为<span class="math inline">\(z&gt;0\)</span>的所有位置放置一个强度为<span class="math inline">\(Q(z)\)</span>的各向同性点光源：</p>
+<p><span class="math display">\[Q(z)=\alpha^{\prime} \mu_{t}^{\prime} \mathrm{e}^{-\mu_{t}^{\prime} z}\]</span></p>
+<p>对于一个给予的格林函数<span class="math inline">\(\Phi(r)\)</span>，需要对如下的积分求解：</p>
+<p><span class="math display">\[\int_{0}^{\infty} \Phi\left(\sqrt{r^{2}+z^{2}}\right) Q(z) d z=\int_{0}^{\infty} \Phi\left(\sqrt{r^{2}+z^{2}}\right) \alpha^{\prime} \mu_{t}^{\prime} \mathrm{e}^{-\mu_{t}^{\prime} z} d z\]</span></p>
+<p>论文接下来就提出了一个十分巧妙的假设：把格林函数当作一个三维归一化的高斯函数，这样就可以把积分转化为二维高斯函数：</p>
+<p><span class="math display">\[\int_{0}^{\infty} G_{3 \mathrm{D}}\left(v, \sqrt{r^{2}+z^{2}}\right) Q(z) d z=\frac{1}{2} \mu_{s}^{\prime} f\left(\mu_{t}^{\prime 2} v / 2\right) G_{2 \mathrm{D}}(v, r)\]</span></p>
+<p>其中<span class="math inline">\(f(x)=\mathrm{e}^{x} \operatorname{erfc}(\sqrt{x})\)</span>，这样一来得到了解析解，就可以避免昂贵的数值积分。</p>
+<h3 id="量化漫射">量化漫射</h3>
+<p>根据爱因斯坦提出的理论，离开点光源的粒子或者光子呈现高斯分布，其平均位移和<span class="math inline">\(\sqrt{tD}\)</span>成正比。稳态格林函数的解也就是过去时间内发射的所有贡献：</p>
+<p><span class="math display">\[\frac{1}{4 \pi D} \frac{\mathrm{e}^{-r \sqrt{\frac{\mu_{a}}{D}}}}{r}=\int_{0}^{\infty} \frac{c}{(4 \pi D c t)^{3 / 2}} \mathrm{e}^{-\mu_{a} c t} \mathrm{e}^{-r^{2} /(4 D c t)} d t\\
+= \int_{0}^{\infty} \mathrm{e}^{-\tau \mu_{a}} G_{3 \mathrm{D}}(2 D \tau, r) d \tau
+\]</span></p>
+<p>这也意味着在某个时间<span class="math inline">\(\tau\)</span>，发射的光子的分布是呈现以<span class="math inline">\(2D\tau\)</span>的三维高斯分布的。接下来，我们将时间间隔量化，分割为<span class="math inline">\(k+1\)</span>个时间片<span class="math inline">\(\tau_i\)</span>，接下来使用一个带权重的三位高斯分布来近似光子在对应时间片<span class="math inline">\([\tau_i, \tau_{i+1}]\)</span>的分布吗，这样就可以把上面的积分转化为求和（有点高斯-勒让德积分的味道）：</p>
+<p><span class="math display">\[\phi(r)=\int_{0}^{\infty} \mathrm{e}^{-\tau \mu_{a}} G_{3 \mathrm{D}}(2 D \tau, r) d \tau \approx \sum_{i=0}^{k-1} w_{i} G_{3 \mathrm{D}}\left(v_{i}, r\right)\]</span></p>
+<p>简单的，权重就是我们去掉的指数项在时间片的积分，可以很轻易地使用解析方法求得。通过上述方法求出的展开式和正确的漫射解有着相同的零阶矩。时间片的选择论文直接给出了一个常数<span class="math inline">\(\tau_i = s^{i - 1}\tau_1, s\in [1.5, 2.0]\)</span>，结果还是令人十分满意的，论文中给出的例子随着<span class="math inline">\(r\)</span>的变化，误差仅有0.002%（具体数据请参见论文）。</p>
+<h3 id="拓展多极子模型">拓展多极子模型</h3>
+<p>接下来将多极子模型和量化漫射模型结合起来，前文提到的公式(1)中的弹道项（不知道这么翻译对不对，原文是ballistic term）产生了单散射光被单独考虑；其余项则使用量化漫射的有限高斯展开处理。对于有限层数的偏移为<span class="math inline">\(m\)</span>的高斯源，在<span class="math inline">\(z_1\)</span>和<span class="math inline">\(z_2\)</span>的积分使用如下展开方法：</p>
+<p><span class="math display">\[\begin{array}{c}
+\int_{z_{1}}^{z_{2}} Q(z) G_{3 \mathrm{D}}\left(v, \sqrt{r^{2}+(z+m)^{2}}\right) d z=G_{2 \mathrm{D}}(v, r) w_{\phi}\left(v, z_{1}, z_{2}, m\right), \\
+w_{\phi}\left(v, z_{1}, z_{2}, m\right)=\int_{z_{1}}^{z_{2}} \frac{\mathrm{e}^{-\frac{(-z+m)^{2}}{2 v}}}{\sqrt{2 \pi v}} \alpha^{\prime} \mu_{t} \mathrm{e}^{-\mu_{t} z} d z= \\
+\frac{\alpha^{\prime} \mu_{t}}{2} \mathrm{e}^{m \mu_{t}+\frac{\mu_{t} v}{2}}\left(\operatorname{erf}\left[\frac{m+\mu_{t} v+z_{2}}{\sqrt{2 v}}\right]-\operatorname{erf}\left[\frac{m+\mu_{t} v+z_{1}}{\sqrt{2 v}}\right]\right) .
+\end{array}\]</span></p>
+<blockquote>
+<p><strong>Updated 2022/7/22</strong>：在实现的时候，发现这个模型在<span class="math inline">\(r\)</span>极大时根本没有办法拟合MC的结果，经过长时间的排查问题出现在：<span class="math inline">\(w_\phi\)</span>的公式在<span class="math inline">\(v\)</span>过大的时候是<strong>极其不稳定</strong>的，找遍全网终于找到了<em>可能</em>是d'Eon在实现的时候使用的<span class="math inline">\(v\)</span>较大时的稳定函数：</p>
+</blockquote>
+<p>$ 𝑤_=(′ _𝑡 𝑣 𝑒<sup>{𝑐_1−𝑐_2</sup>2/2𝑣} (3𝑣<sup>2−𝑣𝑐_2</sup>2+𝑐_2^4 ))/( 𝑐_2^5 )$，其中 <span class="math inline">\(𝑐_1=\mu_𝑡 (𝑚+(\mu_𝑡 𝑣)/2),𝑐_2=𝑚+\mu_𝑡 𝑣\)</span></p>
+<blockquote>
+<p>，这里我在实现的时候就选择在指数<span class="math inline">\(c_1 &gt; 20\)</span>时切换到这个公式，很好地解决了函数地拟合问题。</p>
+</blockquote>
+<p>表面通量是一个高斯分布，其权重<span class="math inline">\(w_{\vec{E}}\)</span>计算如下<sub>吐槽一下这篇文章里公式真的好多</sub>：</p>
+<p><span class="math display">\[\begin{aligned}
+w_{\vec{E}}\left(v, z_{1}, z_{2}, m\right) &amp;=D \mu_{t}\left[-w_{\phi}\left(v, z_{1}, z_{2}, m\right)\right.\\
+&amp;\left.+\frac{\alpha^{\prime}\left(\mathrm{e}^{-\frac{m^{2}}{2 v}-\frac{\left(m+\mu_{v} v\right) z_{1}}{v}-\frac{z_{1}^{2}}{2 v}}-\mathrm{e}^{\left.-\frac{m^{2}}{2 v}-\frac{\left(m+\mu_{t} v\right) z_{2}}{v}-\frac{z_{2}^{2}}{2 v}\right)}\right]}{\sqrt{2 \pi v}}\right]
+\end{aligned}\]</span></p>
+<p>对于多极子的每一对编号为<span class="math inline">\(j\)</span>的源，偶极子反射率fluence权重和flux权重计算如下：</p>
+<p><span class="math display">\[\begin{array}{l}
+w_{\phi R}(v, j)=w_{\phi}\left(v, 0, d, m_{r, j}\right)-w_{\phi}\left(v, 0, d,-m_{v, j}\right) \\
+w_{\vec{E} R}(v, j)=w_{\vec{E}}\left(v, 0, d, m_{r, j}\right)+w_{\vec{E}}\left(v, 0, d,-m_{v, j}\right)
+\end{array}\]</span></p>
+<p>将每一对偶极子反射率和进行带权求和总反射率权重，这里引用了论文在开始的时候提到的<code>KP出射计算法</code>（即使用拓展源计算所有出射的能量，结果是fluence和flux在表面上的线性组合：<span class="math inline">\(R(r)=C_{\phi} \phi(r, z=0)+C_{\vec{E}}(-D \nabla \phi(r, z=0) \cdot(0,0,-1))\)</span>，$C_{}=(1-2 C_{1}) <span class="math inline">\(，\)</span> C_{}=(1-3 C_{2})$）对表面上的两项进行加权求和：</p>
+<p><span class="math display">\[w_{R}(i)=\sum_{j=-n}^{n}\left[C_{\phi}\left(\eta_{\text {top }}\right) w_{\phi R}\left(v_{i}, j\right)+C_{\vec{E}}\left(\eta_{\text {top }}\right) w_{\vec{E} R}\left(v_{i}, j\right)\right]\]</span></p>
+<p>然后我们再用格林函数展开对所有的高斯函数进行加权求和：</p>
+<p><span class="math display">\[R^{+}(r)=\alpha^{\prime} \sum_{i=0}^{k-1} w_{R}(i) w_{i} G_{2 \mathrm{D}}\left(v_{i}, r\right)\]</span></p>
+<p>即可得到拓展多极子模型下的<em>向下反射率分布</em>，同样的方法，把位置挪到<span class="math inline">\(d\)</span>，就可以得到<em>向下传输分布</em><span class="math inline">\(T^+(r)\)</span></p>
+<h3 id="多层材料">多层材料</h3>
+<p>回顾一下，在Donner'05那篇论文里，对于多层材料采用了傅立叶变换+递归回代<span class="math inline">\(\mathcal{T}\)</span>和<span class="math inline">\(\mathcal{R}\)</span>的方法，而d'Eon'11这篇论文在附录中提出了对分布的高斯函数进行快速卷积的函数</p>
+<center>
+<img src="/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/fc.png" class="">
+</center>
+<p>去掉了快速傅立叶变换并且保证了能量守恒。</p>
+<h3 id="使用qd-bssrdf进行渲染">使用QD BSSRDF进行渲染</h3>
+<p>对于BSSRDF的S项，论文多提出了一个减弱强度的传输项<span class="math inline">\(S^{(0)}\)</span>，使用与深度<span class="math inline">\(d\)</span>相关的<span class="math inline">\(e^{-d\mu_t}\)</span>来计算，然后单次散射项直接使用Jensen'01的方法计算，多散射项则使用本文提到的量化漫射计算。</p>
+<h2 id="a-better-dipole-deon12">A Better Dipole, d'Eon'12</h2>
+<p>这篇论文主要讲述在偶极子模型(Jensen'01)下通过改进参数（大部分来自d'Eon'11提出的量化模型）来实现复杂度几乎不改变的情况下提升模型的准确率的方法（前排提示，这篇论文的内容很简单易懂，除去各种diagram只有3页内容）。</p>
+<h3 id="previous-work">Previous Work</h3>
+<p>首先可以回顾一下以往提出的几种模型其各自的优缺点：</p>
+<ul>
+<li><strong>Jensen'01</strong>：提出了基本的BSSRDF概念以及一个实际可用的模型以及用偶极子计算Diffusion Approximation，缺点就不说了，假设了不少理想状况</li>
+<li><strong>Donner'05</strong>：提出了多极子模型来补偿有限深度介质的<span class="math inline">\(T\)</span>透射率，考虑了透射传输以支持多层材料的情况，同时将计算<span class="math inline">\(R\)</span>项时使用的菲涅尔项替换成BRDF以支持粗糙面；缺点是对于超薄板、高频光（overblur&amp;high-frequence loss）、高吸收率、近源（<span class="math inline">\(r\)</span>很小的时候）准确率不足（d'Eon'11）</li>
+<li><strong>d'Eon'11</strong>：提出了全新的量化漫射模型，通过新的拓展源函数来计算fluence，同样使用于多极子模型，利用时域上光子呈高斯分布的原理，使用时域上的积分确保了多极子模型在任何情况下的物理正确性，并且正确地解耦合了diffusion和single scattering；缺点是一方面和前几种理论基于不同的原理，理解和重构起来较为麻烦，另一方面尽管相较于前几种Model已经有了很大的改进，但是对于各向异性材料的支持仍然不是很好，同时论文最后也提到对于多层材料的情况，受限于Donner'05的模型，将每次进入下一层的illumination都看作是一个漫射面光源，没有做论文中提到的single scattering的支持。</li>
+</ul>
+<p>在这个改进的双极子模型中，同样沿用了量化漫射模型，但是去掉了拓展源项<span class="math inline">\(Q(z) = \alpha&#39;\mu_t&#39;e^{-\mu_t&#39;z}\)</span>，目的是将d'Eon'11模型中扩散渐进和菲涅尔一致的边界条件得到更广泛的使用。最终的模型仍然使用了偶极子的模型，避免了复杂的量化漫射格林函数积分转化为高斯和的计算，并且很容易将已有的Jensen'01的模型改造过来。虽然准确率有所增加，但是仍然会具有偶极子模型的众多不足之处，因此属于在特定情况下的改进方法。</p>
+<h3 id="methods">Methods</h3>
+<p>首先对比Jensen'01，将BSSRDF的表达式改造成了：</p>
+<p><span class="math display">\[S_{d}\left(x_{i}, \vec{\omega}_{i} ; x_{o}, \vec{\omega}_{o}\right)=\frac{1}{\pi} F_{t}\left(x_{i}, \vec{\omega}_{i}\right) R\left(\left\|x_{i}-x_{o}\right\|_{2}\right) \frac{F_{t}\left(x_{o}, \vec{\omega}_{o}\right)}{1-2 C_{1}\left(\frac{1}{\eta}\right)}\]</span></p>
+<p>就是在出射菲涅尔项的下面增加了一个归一化系数作为分母（d'Eon'11），对于<span class="math inline">\(C_1\)</span>给出的近似如下：</p>
+<p><span class="math display">\[2 C_{1} \approx\left\{\begin{array}{cc}
+0.919317-3.4793 \eta+6.75335 \eta^{2}-7.80989 \eta^{3} &amp; \\
++4.98554 \eta^{4}-1.36881 \eta^{5}, &amp; \eta&lt;1 \\
+-9.23372+22.2272 \eta-20.9292 \eta^{2}+10.2291 \eta^{3} &amp; \\
+-2.54396 \eta^{4}+0.254913 \eta^{5}, &amp; \eta&gt;=1
+\end{array}\right.\]</span></p>
+<p>传统的理论尝试在diffusion term中并入对single scattering的计算，论文指出这是很不科学的并且在某些情况下会导致较为严重的误差，因此single scattering在本文模型中会被单独的计算。</p>
+<p>接下来，就是改进点了，其实Better Dipole的主要思想也就是通过结合d'Eon'11的参数和Dipole模型来进行计算，参数修正表如下：</p>
+<center>
+<img src="/2022/04/12/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9ABetter-BSSRDF-Models(1)/table.png" class="">
+</center>
+<p>这篇论文后面的内容基本就是几种不同模型在不同参数情况下的对比了（方便我们在不同的情况下使用不同的模型进行渲染），这里就不再赘述，如果以后看到比较感兴趣的可能会挑出来讲一讲。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>PBR论文简读：Better BSSRDF Models(1)</p><p><a href="https://hyiker.github.io/2022/04/12/PBR论文简读：Better-BSSRDF-Models(1)/">https://hyiker.github.io/2022/04/12/PBR论文简读：Better-BSSRDF-Models(1)/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Carbene Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-04-12</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-01-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/PBR/">PBR</a><a class="link-muted mr-2" rel="tag" href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a><a class="link-muted mr-2" rel="tag" href="/tags/%E7%A6%BB%E7%BA%BF%E6%B8%B2%E6%9F%93/">离线渲染</a></div><!--!--></article></div><!--!--><div class="card"><nav class="post-navigation mt-4 level is-mobile card-content"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/04/19/%E7%95%AA%E5%89%A7%E7%82%B9%E8%AF%84%EF%BC%9A%E5%9C%A82022%E5%B9%B4%E8%A7%82%E7%9C%8B%E3%80%8A%E5%87%89%E5%AE%AB%E6%98%A5%E6%97%A5%E3%80%8B%E7%B3%BB%E5%88%97%E6%98%AF%E6%80%8E%E6%A0%B7%E4%B8%80%E7%A7%8D%E4%BD%93%E9%AA%8C/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">番剧点评：在2022年观看《凉宫春日》系列是怎样一种体验</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/04/09/PBR%E8%AE%BA%E6%96%87%E7%AE%80%E8%AF%BB%EF%BC%9AA-Practical-Model-for-Subsurface-Light-Transport/"><span class="level-item">PBR论文简读：A Practical Model for Subsurface Light Transport</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content" id="valine-thread"></div><script src="//cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread',
+            appId: "r0qA9mbjz4lWX92StwtatUSd-gzGzoHsz",
+            appKey: "eqbjaQHLLgk5yUvAwzm7cFVn",
+            placeholder: "来留言⑧~",
+            
+            avatarForce: false,
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            lang: "zh-CN",
+            visitor: false,
+            highlight: true,
+            recordIP: false,
+            
+            
+            
+            enableQQ: false,
+            requiredFields: [],
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://pic.carbene.cc/i/2024/01/23/65af808bd5f80.webp" alt="Carbene Hu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Carbene Hu</p><p class="is-size-6 is-block">An ordinary guy</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">38</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">66</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Hyiker" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Zhihu" href="https://www.zhihu.com/people/sidice-24"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Academic" href="https://chonghao.carbene.cc"><i class="fas fa-graduation-cap"></i></a></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://wadechiang.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">WadeChiang</span></span><span class="level-right"><span class="level-item tag">wadechiang.github.io</span></span></a></li><li><a class="level is-mobile" href="https://clslaid.icu/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">CL</span></span><span class="level-right"><span class="level-item tag">clslaid.icu</span></span></a></li><li><a class="level is-mobile" href="https://ayamir.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Ayamir</span></span><span class="level-right"><span class="level-item tag">ayamir.github.io</span></span></a></li><li><a class="level is-mobile" href="https://leeshy-tech.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">LeeShy</span></span><span class="level-right"><span class="level-item tag">leeshy-tech.github.io</span></span></a></li><li><a class="level is-mobile" href="https://maxlinn.site/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Maxlinn</span></span><span class="level-right"><span class="level-item tag">maxlinn.site</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2026/01/"><span class="level-start"><span class="level-item">一月 2026</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/12/"><span class="level-start"><span class="level-item">十二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/11/"><span class="level-start"><span class="level-item">十一月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/10/"><span class="level-start"><span class="level-item">十月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/06/"><span class="level-start"><span class="level-item">六月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/05/"><span class="level-start"><span class="level-item">五月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/01/"><span class="level-start"><span class="level-item">一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">八月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div></div><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><!--!--></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a><p class="is-size-7"><span>&copy; 2026 Carbene Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/analytics.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script type="text/javascript" src="/js/imaegoo/universe.js"></script></body></html>

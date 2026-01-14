@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>BSDF是否可线性叠加的推导 - 甲醛的小屋</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Carbene Hu"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Carbene Hu"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Linear composition of BSDF?  ROBUST MC Chapter 4 &amp;gt; The operator \(A\) that provides a linear mapping in a vector space \(\mathcal F \rightarrow \mathcal F\) is called a linear operator. \(Af\) deno"><meta property="og:type" content="blog"><meta property="og:title" content="BSDF是否可线性叠加的推导"><meta property="og:url" content="https://hyiker.github.io/2024/11/19/BSDF%E6%98%AF%E5%90%A6%E5%8F%AF%E7%BA%BF%E6%80%A7%E5%8F%A0%E5%8A%A0%E7%9A%84%E6%8E%A8%E5%AF%BC/"><meta property="og:site_name" content="甲醛的小屋"><meta property="og:description" content="Linear composition of BSDF?  ROBUST MC Chapter 4 &amp;gt; The operator \(A\) that provides a linear mapping in a vector space \(\mathcal F \rightarrow \mathcal F\) is called a linear operator. \(Af\) deno"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://hyiker.github.io/img/og_image.png"><meta property="article:published_time" content="2024-11-19T15:07:53.000Z"><meta property="article:modified_time" content="2026-01-14T11:16:13.125Z"><meta property="article:author" content="Carbene Hu"><meta property="article:tag" content="BSDF"><meta property="article:tag" content="PBR"><meta property="article:tag" content="Light transport"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://hyiker.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hyiker.github.io/2024/11/19/BSDF%E6%98%AF%E5%90%A6%E5%8F%AF%E7%BA%BF%E6%80%A7%E5%8F%A0%E5%8A%A0%E7%9A%84%E6%8E%A8%E5%AF%BC/"},"headline":"BSDF是否可线性叠加的推导","image":["https://hyiker.github.io/img/og_image.png"],"datePublished":"2024-11-19T15:07:53.000Z","dateModified":"2026-01-14T11:16:13.125Z","author":{"@type":"Person","name":"Carbene Hu"},"publisher":{"@type":"Organization","name":"甲醛的小屋","logo":{"@type":"ImageObject","url":{"light":"https://s4.ax1x.com/2021/12/30/TR2810.png","dark":"https://s1.ax1x.com/2022/04/03/q7u93t.png"}}},"description":"Linear composition of BSDF?  ROBUST MC Chapter 4 &gt; The operator \\(A\\) that provides a linear mapping in a vector space \\(\\mathcal F \\rightarrow \\mathcal F\\) is called a linear operator. \\(Af\\) deno"}</script><link rel="canonical" href="https://hyiker.github.io/2024/11/19/BSDF%E6%98%AF%E5%90%A6%E5%8F%AF%E7%BA%BF%E6%80%A7%E5%8F%A0%E5%8A%A0%E7%9A%84%E6%8E%A8%E5%AF%BC/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/resources">Resources</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-11-19T15:07:53.000Z" title="11/19/2024, 3:07:53 PM">2024-11-19</time>发表</span><span class="level-item"><time dateTime="2026-01-14T11:16:13.125Z" title="1/14/2026, 11:16:13 AM">2026-01-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a><span> / </span><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/%E5%85%89%E4%BC%A0%E8%BE%93/">光传输</a></span><span class="level-item">3 分钟读完 (大约489个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title title-prefix is-3 is-size-4-mobile">BSDF是否可线性叠加的推导</h1><div class="content"><h3 id="linear-composition-of-bsdf">Linear composition of BSDF?</h3>
+<ul>
+<li>ROBUST MC Chapter 4 &gt; The operator <span class="math inline">\(A\)</span> that provides a linear mapping in a vector space <span class="math inline">\(\mathcal F \rightarrow \mathcal F\)</span> is called a linear operator. <span class="math inline">\(Af\)</span> denotes the application of an operator to a function, resulting another new function. ### Preliminary Light transport operator: <span class="math display">\[
+\mathbf T = \mathbf K\mathbf G \tag{1}
+\]</span></li>
+</ul>
+<p>Where <span class="math inline">\(\mathbf K\)</span> is the <strong>local scattering operator</strong>, <span class="math inline">\(L_o = \mathbf K L_i\)</span>, both <span class="math inline">\(L\)</span> defined in the whole ray space <span class="math inline">\(\mathcal R\)</span>:</p>
+<p><span class="math display">\[
+(\mathbf Kh)(\mathbf{x}, \omega_o) = \int_{S^2} f_s(\mathbf{x}, \omega_i \to \omega_o) \, h(\mathbf{x}, \omega_i) \, d\sigma_{\mathbf{x}}^\perp(\omega_i)
+\]</span> <span class="math inline">\(\mathbf G\)</span> is the propagation operator, defining the geometric property of the space, <span class="math inline">\(L_i = \mathbf G L_o\)</span>, which should be symmetric. <span class="math display">\[
+(\mathbf Gh)(\mathbf{x}, \omega_i) = \begin{cases} h(\mathbf{x}_M(\mathbf{x}, \omega_i), -\omega_i) &amp; \text{if } d_M(\mathbf{x}, \omega_i) &lt; \infty, \\ 0 &amp; \text{otherwise,} \end{cases}
+\]</span></p>
+<p>Now right the light transport equation in operator form: <span class="math display">\[
+L = L_e + \mathbf T L
+\]</span> Inverting the operator equation: <span class="math display">\[
+\begin{equation} \begin{aligned}
+(\mathbf I - \mathbf T)L &amp;= L_e \\
+L &amp;= (\mathbf I - \mathbf T)^{-1} L_e
+\end{aligned} \end{equation}
+\]</span> Defining solution <span class="math inline">\(\mathbf S = (\mathbf I - \mathbf T)^{-1}\)</span>. Given that <span class="math inline">\(\Vert \mathbf T \Vert \lt 1\)</span>, the inversion can be expanded with <em>Neumann series</em>: <span class="math display">\[
+\mathbf S = (\mathbf I - \mathbf T)^{-1} = \sum^{\infty}_{i = 0} \mathbf T^i = \mathbf I + \mathbf T + \mathbf T^2+ \cdots
+\]</span> Light transport can then be expanded as well: <span class="math display">\[
+L = L_e + \mathbf T L_e + \mathbf T^2 L_e + \cdots \tag{2}
+\]</span></p>
+<h3 id="derivation">Derivation</h3>
+<p>Given a scene, with all reflective materials modeling as the accumulation of two BRDFs:</p>
+<p><span class="math display">\[
+f_r(\omega_i, \omega_o) = f_{diffuse}(\omega_i, \omega_o) + f_{specular}(\omega_i, \omega_o)
+\]</span> Meaning that: <span class="math display">\[
+(\mathbf Kh)(\mathbf{x}, \omega_o) = \int_{S^2} (f_{diffuse}(\mathbf{x}, \omega_i \to \omega_o) + f_{specular}(\mathbf{x}, \omega_i \to \omega_o)) \, h(\mathbf{x}, \omega_i) \, d\sigma_{\mathbf{x}}^\perp(\omega_i)
+\]</span> Because of the linearity of integration, the local scattering operator can be decomposed: <span class="math display">\[
+(\mathbf Kh)(\mathbf{x}, \omega_o) = ((\mathbf K_1 + \mathbf K_2)h)(\mathbf{x}, \omega_o)
+\]</span> In which <span class="math inline">\(\mathbf K_1\)</span> and <span class="math inline">\(\mathbf K_2\)</span> are the diffuse and specular operator respectively:</p>
+<p><span class="math display">\[
+\mathbf K = \mathbf K_1 + \mathbf K_2 \tag{3}
+\]</span></p>
+<p>Let <span class="math inline">\(\mathbf T_1 = \mathbf K_1 \mathbf G\)</span> and <span class="math inline">\(\mathbf T_2 = \mathbf K_2 \mathbf G\)</span>, we define the linear accumulation of two BSDF to be: <span class="math display">\[
+L^\prime = \sum^\infty_{i = 0} ((\mathbf T_1 + \mathbf T_2) \mathbf G) ^ i L_e
+\]</span> Substitute <span class="math inline">\((3)\)</span> into <span class="math inline">\((1)\)</span> we get: <span class="math display">\[
+\mathbf T = (\mathbf K_1 + \mathbf K_2)\mathbf G \tag{4}
+\]</span></p>
+<p>Bring <span class="math inline">\((4)\)</span> into <span class="math inline">\((2)\)</span> we get: <span class="math display">\[
+L = L_e + ((\mathbf K_1 +\mathbf K_2)\mathbf G)L_e + ((\mathbf K_1 +\mathbf K_2)\mathbf G)^2L_e + \cdots
+\]</span> Intuitively, <span class="math inline">\(L^\prime = L\)</span> iff the two operator <span class="math inline">\(\mathbf K_1\)</span> and <span class="math inline">\(\mathbf K_2\)</span> is strictly orthogonal, such that:</p>
+<p><span class="math display">\[
+(\mathbf K_1 \mathbf K_2h)(\mathbf{x}, \omega_o) = 0
+\]</span></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>BSDF是否可线性叠加的推导</p><p><a href="https://hyiker.github.io/2024/11/19/BSDF是否可线性叠加的推导/">https://hyiker.github.io/2024/11/19/BSDF是否可线性叠加的推导/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Carbene Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-11-19</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-01-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/BSDF/">BSDF</a><a class="link-muted mr-2" rel="tag" href="/tags/PBR/">PBR</a><a class="link-muted mr-2" rel="tag" href="/tags/Light-transport/">Light transport</a></div><!--!--></article></div><!--!--><div class="card"><nav class="post-navigation mt-4 level is-mobile card-content"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/12/26/Siggraph-Asia-2024%E6%B8%B2%E6%9F%93%E8%AE%BA%E6%96%87%E9%80%9F%E9%80%92/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Siggraph Asia 2024渲染论文速递</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/10/07/%E2%80%9C%E8%BF%99%E6%B8%B8%E6%88%8F%E9%83%BD%E6%98%AF%E8%B0%81%E5%9C%A8%E8%B5%A2%EF%BC%9F%E2%80%9D%EF%BC%9A%E6%89%BE%E5%88%B0%E5%90%88%E9%80%82%E7%9A%84%E7%AB%9E%E6%8A%80%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F/"><span class="level-item">“这游戏都是谁在赢？”：找到合适的竞技匹配模式</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content" id="valine-thread"></div><script src="//cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread',
+            appId: "r0qA9mbjz4lWX92StwtatUSd-gzGzoHsz",
+            appKey: "eqbjaQHLLgk5yUvAwzm7cFVn",
+            placeholder: "来留言⑧~",
+            
+            avatarForce: false,
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            lang: "zh-CN",
+            visitor: false,
+            highlight: true,
+            recordIP: false,
+            
+            
+            
+            enableQQ: false,
+            requiredFields: [],
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://pic.carbene.cc/i/2024/01/23/65af808bd5f80.webp" alt="Carbene Hu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Carbene Hu</p><p class="is-size-6 is-block">An ordinary guy</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">38</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">66</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Hyiker" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Zhihu" href="https://www.zhihu.com/people/sidice-24"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Academic" href="https://chonghao.carbene.cc"><i class="fas fa-graduation-cap"></i></a></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://wadechiang.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">WadeChiang</span></span><span class="level-right"><span class="level-item tag">wadechiang.github.io</span></span></a></li><li><a class="level is-mobile" href="https://clslaid.icu/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">CL</span></span><span class="level-right"><span class="level-item tag">clslaid.icu</span></span></a></li><li><a class="level is-mobile" href="https://ayamir.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Ayamir</span></span><span class="level-right"><span class="level-item tag">ayamir.github.io</span></span></a></li><li><a class="level is-mobile" href="https://leeshy-tech.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">LeeShy</span></span><span class="level-right"><span class="level-item tag">leeshy-tech.github.io</span></span></a></li><li><a class="level is-mobile" href="https://maxlinn.site/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Maxlinn</span></span><span class="level-right"><span class="level-item tag">maxlinn.site</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2026/01/"><span class="level-start"><span class="level-item">一月 2026</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/12/"><span class="level-start"><span class="level-item">十二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/11/"><span class="level-start"><span class="level-item">十一月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/10/"><span class="level-start"><span class="level-item">十月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/06/"><span class="level-start"><span class="level-item">六月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/05/"><span class="level-start"><span class="level-item">五月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/01/"><span class="level-start"><span class="level-item">一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">八月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#linear-composition-of-bsdf"><span class="level-left"><span class="level-item">Linear composition of BSDF?</span></span></a></li><li><a class="level is-mobile" href="#derivation"><span class="level-left"><span class="level-item">Derivation</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a><p class="is-size-7"><span>&copy; 2026 Carbene Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/analytics.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script type="text/javascript" src="/js/imaegoo/universe.js"></script></body></html>

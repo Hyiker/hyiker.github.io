@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Siggraph Asia 2024渲染论文速递 - 甲醛的小屋</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Carbene Hu"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Carbene Hu"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="image.png  InfNeRF: Towards Infinite Scale NeRF Rendering with O(log n) Space Complexity 用八叉树给 NeRF +NGP 叠上了八叉树，每个八叉树节点再用 2048 的 NGP Nerf，不懂 NeRF，但是看起来像 A+B 的工作  GS^3: Efficient Relighting with Tripl"><meta property="og:type" content="blog"><meta property="og:title" content="Siggraph Asia 2024渲染论文速递"><meta property="og:url" content="https://hyiker.github.io/2024/12/26/Siggraph-Asia-2024%E6%B8%B2%E6%9F%93%E8%AE%BA%E6%96%87%E9%80%9F%E9%80%92/"><meta property="og:site_name" content="甲醛的小屋"><meta property="og:description" content="image.png  InfNeRF: Towards Infinite Scale NeRF Rendering with O(log n) Space Complexity 用八叉树给 NeRF +NGP 叠上了八叉树，每个八叉树节点再用 2048 的 NGP Nerf，不懂 NeRF，但是看起来像 A+B 的工作  GS^3: Efficient Relighting with Tripl"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676cff5bc91b5.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d023ebc583.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d075741c7b.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d0df3733d1.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d0e91442a8.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d0f9a39c8c.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d116bbacdd.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d1444dbd86.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d599f6b95a.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d6108d3a8f.webp"><meta property="og:image" content="https://pic.carbene.cc/i/2024/12/26/676d643d118cd.webp"><meta property="article:published_time" content="2024-12-26T14:55:57.000Z"><meta property="article:modified_time" content="2026-01-14T11:16:13.129Z"><meta property="article:author" content="Carbene Hu"><meta property="article:tag" content="Siggraph Asia"><meta property="article:tag" content="渲染"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://pic.carbene.cc/i/2024/12/26/676cff5bc91b5.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hyiker.github.io/2024/12/26/Siggraph-Asia-2024%E6%B8%B2%E6%9F%93%E8%AE%BA%E6%96%87%E9%80%9F%E9%80%92/"},"headline":"Siggraph Asia 2024渲染论文速递","image":["https://pic.carbene.cc/i/2024/12/26/676cff5bc91b5.webp","https://pic.carbene.cc/i/2024/12/26/676d023ebc583.webp","https://pic.carbene.cc/i/2024/12/26/676d075741c7b.webp","https://pic.carbene.cc/i/2024/12/26/676d0df3733d1.webp","https://pic.carbene.cc/i/2024/12/26/676d0e91442a8.webp","https://pic.carbene.cc/i/2024/12/26/676d0f9a39c8c.webp","https://pic.carbene.cc/i/2024/12/26/676d116bbacdd.webp","https://pic.carbene.cc/i/2024/12/26/676d1444dbd86.webp","https://pic.carbene.cc/i/2024/12/26/676d599f6b95a.webp","https://pic.carbene.cc/i/2024/12/26/676d6108d3a8f.webp","https://pic.carbene.cc/i/2024/12/26/676d643d118cd.webp"],"datePublished":"2024-12-26T14:55:57.000Z","dateModified":"2026-01-14T11:16:13.129Z","author":{"@type":"Person","name":"Carbene Hu"},"publisher":{"@type":"Organization","name":"甲醛的小屋","logo":{"@type":"ImageObject","url":{"light":"https://s4.ax1x.com/2021/12/30/TR2810.png","dark":"https://s1.ax1x.com/2022/04/03/q7u93t.png"}}},"description":"image.png  InfNeRF: Towards Infinite Scale NeRF Rendering with O(log n) Space Complexity 用八叉树给 NeRF +NGP 叠上了八叉树，每个八叉树节点再用 2048 的 NGP Nerf，不懂 NeRF，但是看起来像 A+B 的工作  GS^3: Efficient Relighting with Tripl"}</script><link rel="canonical" href="https://hyiker.github.io/2024/12/26/Siggraph-Asia-2024%E6%B8%B2%E6%9F%93%E8%AE%BA%E6%96%87%E9%80%9F%E9%80%92/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/resources">Resources</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-12-26T14:55:57.000Z" title="12/26/2024, 2:55:57 PM">2024-12-26</time>发表</span><span class="level-item"><time dateTime="2026-01-14T11:16:13.129Z" title="1/14/2026, 11:16:13 AM">2026-01-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a><span> / </span><a class="link-muted" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/PBR/">PBR</a></span><span class="level-item">9 分钟读完 (大约1277个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title title-prefix is-3 is-size-4-mobile">Siggraph Asia 2024渲染论文速递</h1><div class="content"><figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676cff5bc91b5.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>InfNeRF: Towards Infinite Scale NeRF Rendering with O(log n) Space Complexity</strong></p>
+<p>用八叉树给 NeRF +NGP 叠上了八叉树，每个八叉树节点再用 2048 的 NGP Nerf，不懂 NeRF，但是看起来像 A+B 的工作</p>
+<p><img src="https://pic.carbene.cc/i/2024/12/26/676d023ebc583.webp" /></p>
+<p><strong>GS^3: Efficient Relighting with Triple Gaussian Splatting</strong></p>
+<p>吴鸿智老师组的工作，给 3d gaussian 引入了更复杂的参数，把着色拆分成 Lambertian+angular gaussian（又进一步 PBR 化了），再把单光源的阴影拆出来。看起来能处理的材质复杂度就高了很多，毛发什么的表现也不错，可惜似乎只支持单光源。 代码开源在 https://github.com/gsrelight/gs-relight</p>
+<figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676d075741c7b.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>MARS: Multi-sample Allocation through Russian roulette and Splitting</strong></p>
+<p>Adaptive multi-sample MIS，在之前的方法（只优化 variance）上额外考虑 sample 的 cost（实际上最后是优化一个分段的 proxy），基于不动点迭代来分配每个 vertex 的 MIS 样本数，这样可以一定程度上提升时间效率。但是实际结果提升有限，RRS 真是要被卷烂了。</p>
+<figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676d0df3733d1.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>Efficient Neural Path Guiding with 4D Modeling</strong></p>
+<figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676d0e91442a8.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>Dynamic Neural Radiosity with Multi-grid Decomposition</strong></p>
+<p>都是北大李胜老师组的工作，思路很像就一起了，都是用 Sparse Grid 来做高维输入（前者加了一个 t，后者加了一些可编辑的参数），使得大伙能做动态场景了。但是后者看起来本质上是在 Neural radiosity 上提出一些编码整的活（频率编码、SH 编码方向），速度还是受限于场景的可变参数，PG 不是很懂不予置评。NGP 真是无敌啊，把整个神经渲染编码盘起来了。</p>
+<figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676d0f9a39c8c.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>Neural Global Illumination via Superposed Deformable Feature Fields</strong></p>
+<p>浙大霍宇驰老师组的神经渲染工作，在 NeLT 的基础上加上了可变形的 NGP +triplane 编码来实现更好的空间特征映射，并且用多个物体并行编码的方式把 encode 的速度提上去了，效果还是很 fancy 的。可惜的是最后还是接的一个大 decoder，而且并行化编码比较玄学，GPU 要是吃满了也只能老老实实串行了，场景能动的物体一多帧率也还是会往下掉不少。</p>
+<figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676d116bbacdd.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>End-to-End Hybrid Refractive-Diffractive Lens Design with Differentiable Ray-Wave Model</strong></p>
+<p>折射-衍射的 ray-wave 模型可微化，使得透镜的优化可以端到端化，很有意思的基石性工作。不过看起来对比先前工作提升的主要是精确性，希望有朝一日这样的工作能拯救我没对上焦的照片（x）</p>
+<figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676d1444dbd86.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>A Statistical Approach to Monte Carlo Denoising</strong></p>
+<p>这个年代能看到 neural-free 的 denoiser 确实不容易啊，核心是提出了一种基于 Welch t-test 的采样策略，用来接收/拒绝临近像素样本做 denoise。但是缺点也很明显，统计方法是需要优秀样本来辅助的，在低 spp 的情况下还是打不过一众 neural denoiser，而且似乎这个方法是需要输入像素所有 MC 样本的，导致实用性进一步下降。</p>
+<figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676d599f6b95a.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>Hierarchical Light Sampling with Accurate Spherical Gaussian Lighting</strong></p>
+<p>AMD 关于 manylight 的工作，在 stochastic lightcut 的基础上把树的节点用 SG 表示来得到更紧凑的表达，用 NDF 过滤来保证 MC 采样的无偏性。可以和 ReSTIR 结合起来用生成更好的样本，看了下 Reddit 上有人实现的给了好评，不过树还是得在 CPU 上建，Lightcuts 这一类方法感觉还是不太 GPU 友好。</p>
+<figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676d6108d3a8f.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>A Dynamic By-example BTF Synthesis Scheme</strong></p>
+<p>闫令琪老师组的工作，熟悉的材料啊。把 BTF 的 6D 分解成两张 2D 方向纹理，再把 position 作为一个编码参数总共三张（原文里称为 triple plane），在运行时用 MLP 动态合成 BTF，但是似乎 MLP 还是 per material per train 的，让人不禁想问引入这三张纹理的意义（不懂，求指正）。</p>
+<figure>
+<img src="https://pic.carbene.cc/i/2024/12/26/676d643d118cd.webp" alt="image.png" /><figcaption aria-hidden="true">image.png</figcaption>
+</figure>
+<p><strong>Dance-to-Music Generation with Encoder-based Textual Inversion</strong></p>
+<p>不是渲染，但是看起来很有意思，从跳的舞蹈里提取 text prompt 来指导音乐合成，开源在 <a target="_blank" rel="noopener" href="https://github.com/lsfhuihuiff/Dance-to-music_Siggraph_Asia_2024">lsfhuihuiff/Dance-to-music_Siggraph_Asia_2024: The official code for “Dance-to-Music Generation with Encoder-based Textual Inversion“</a>。似乎用的是固定 prompt <code>a @ music with * as the rhythm</code>，那大概考虑不到舞蹈过程中的节奏变换:-(</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Siggraph Asia 2024渲染论文速递</p><p><a href="https://hyiker.github.io/2024/12/26/Siggraph-Asia-2024渲染论文速递/">https://hyiker.github.io/2024/12/26/Siggraph-Asia-2024渲染论文速递/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Carbene Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-12-26</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-01-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Siggraph-Asia/">Siggraph Asia</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%B8%B2%E6%9F%93/">渲染</a></div><!--!--></article></div><!--!--><div class="card"><nav class="post-navigation mt-4 level is-mobile card-content"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2026/01/14/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%9C%A8Blender%E4%B8%AD%E5%AF%BC%E5%87%BA%E5%B8%83%E6%96%99%E5%8A%A8%E7%94%BB%E5%88%B0GLTF-USD/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">从零开始在Blender中导出布料动画到GLTF/USD</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/11/19/BSDF%E6%98%AF%E5%90%A6%E5%8F%AF%E7%BA%BF%E6%80%A7%E5%8F%A0%E5%8A%A0%E7%9A%84%E6%8E%A8%E5%AF%BC/"><span class="level-item">BSDF是否可线性叠加的推导</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content" id="valine-thread"></div><script src="//cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread',
+            appId: "r0qA9mbjz4lWX92StwtatUSd-gzGzoHsz",
+            appKey: "eqbjaQHLLgk5yUvAwzm7cFVn",
+            placeholder: "来留言⑧~",
+            
+            avatarForce: false,
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            lang: "zh-CN",
+            visitor: false,
+            highlight: true,
+            recordIP: false,
+            
+            
+            
+            enableQQ: false,
+            requiredFields: [],
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://pic.carbene.cc/i/2024/01/23/65af808bd5f80.webp" alt="Carbene Hu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Carbene Hu</p><p class="is-size-6 is-block">An ordinary guy</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">38</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">66</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Hyiker" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Zhihu" href="https://www.zhihu.com/people/sidice-24"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Academic" href="https://chonghao.carbene.cc"><i class="fas fa-graduation-cap"></i></a></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://wadechiang.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">WadeChiang</span></span><span class="level-right"><span class="level-item tag">wadechiang.github.io</span></span></a></li><li><a class="level is-mobile" href="https://clslaid.icu/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">CL</span></span><span class="level-right"><span class="level-item tag">clslaid.icu</span></span></a></li><li><a class="level is-mobile" href="https://ayamir.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Ayamir</span></span><span class="level-right"><span class="level-item tag">ayamir.github.io</span></span></a></li><li><a class="level is-mobile" href="https://leeshy-tech.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">LeeShy</span></span><span class="level-right"><span class="level-item tag">leeshy-tech.github.io</span></span></a></li><li><a class="level is-mobile" href="https://maxlinn.site/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Maxlinn</span></span><span class="level-right"><span class="level-item tag">maxlinn.site</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2026/01/"><span class="level-start"><span class="level-item">一月 2026</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/12/"><span class="level-start"><span class="level-item">十二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/11/"><span class="level-start"><span class="level-item">十一月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/10/"><span class="level-start"><span class="level-item">十月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/06/"><span class="level-start"><span class="level-item">六月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/05/"><span class="level-start"><span class="level-item">五月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/01/"><span class="level-start"><span class="level-item">一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">八月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><!--!--></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a><p class="is-size-7"><span>&copy; 2026 Carbene Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/analytics.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script type="text/javascript" src="/js/imaegoo/universe.js"></script></body></html>

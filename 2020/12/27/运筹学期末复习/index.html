@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>运筹学期末复习 - 甲醛的小屋</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Carbene Hu"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Carbene Hu"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="可作为复习资料打印 线性规划问题的单纯形法 线性规划的标准模型，下面给出一个例子 \[\max z &amp;#x3D; c_1x_1+c_2x_2+c_3x_3+c_4x_4\] \[ \left\{\begin{array}{lr} a_{11}x_1+a_{12}x_2+a_{13}x_3+a_{14}x_4&amp;#x3D;b_1 &amp;amp;\\ a_{21}x_1+a_{22}x_2+a_{23}x_3+a_{24}x_"><meta property="og:type" content="blog"><meta property="og:title" content="运筹学期末复习"><meta property="og:url" content="https://hyiker.github.io/2020/12/27/%E8%BF%90%E7%AD%B9%E5%AD%A6%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><meta property="og:site_name" content="甲醛的小屋"><meta property="og:description" content="可作为复习资料打印 线性规划问题的单纯形法 线性规划的标准模型，下面给出一个例子 \[\max z &amp;#x3D; c_1x_1+c_2x_2+c_3x_3+c_4x_4\] \[ \left\{\begin{array}{lr} a_{11}x_1+a_{12}x_2+a_{13}x_3+a_{14}x_4&amp;#x3D;b_1 &amp;amp;\\ a_{21}x_1+a_{22}x_2+a_{23}x_3+a_{24}x_"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://s3.ax1x.com/2020/12/27/r5ZdQf.png"><meta property="og:image" content="https://s3.ax1x.com/2020/12/27/r5Z5mF.png"><meta property="og:image" content="https://s3.ax1x.com/2020/12/27/r5nmJs.png"><meta property="og:image" content="https://s3.ax1x.com/2020/12/27/r5aO3V.png"><meta property="og:image" content="https://s3.ax1x.com/2020/12/27/r5TEB4.png"><meta property="article:published_time" content="2020-12-27T10:25:15.000Z"><meta property="article:modified_time" content="2026-01-14T11:16:13.165Z"><meta property="article:author" content="Carbene Hu"><meta property="article:tag" content="期末"><meta property="article:tag" content="运筹学"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://s3.ax1x.com/2020/12/27/r5ZdQf.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hyiker.github.io/2020/12/27/%E8%BF%90%E7%AD%B9%E5%AD%A6%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"},"headline":"运筹学期末复习","image":["https://s3.ax1x.com/2020/12/27/r5ZdQf.png","https://s3.ax1x.com/2020/12/27/r5Z5mF.png","https://s3.ax1x.com/2020/12/27/r5nmJs.png","https://s3.ax1x.com/2020/12/27/r5aO3V.png","https://s3.ax1x.com/2020/12/27/r5TEB4.png"],"datePublished":"2020-12-27T10:25:15.000Z","dateModified":"2026-01-14T11:16:13.165Z","author":{"@type":"Person","name":"Carbene Hu"},"publisher":{"@type":"Organization","name":"甲醛的小屋","logo":{"@type":"ImageObject","url":{"light":"https://s4.ax1x.com/2021/12/30/TR2810.png","dark":"https://s1.ax1x.com/2022/04/03/q7u93t.png"}}},"description":"可作为复习资料打印 线性规划问题的单纯形法 线性规划的标准模型，下面给出一个例子 \\[\\max z &#x3D; c_1x_1+c_2x_2+c_3x_3+c_4x_4\\] \\[ \\left\\{\\begin{array}{lr} a_{11}x_1+a_{12}x_2+a_{13}x_3+a_{14}x_4&#x3D;b_1 &amp;\\\\ a_{21}x_1+a_{22}x_2+a_{23}x_3+a_{24}x_"}</script><link rel="canonical" href="https://hyiker.github.io/2020/12/27/%E8%BF%90%E7%AD%B9%E5%AD%A6%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/resources">Resources</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-12-27T10:25:15.000Z" title="12/27/2020, 10:25:15 AM">2020-12-27</time>发表</span><span class="level-item"><time dateTime="2026-01-14T11:16:13.165Z" title="1/14/2026, 11:16:13 AM">2026-01-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%80%83%E8%AF%95%E8%AE%B0%E5%BD%95/">考试记录</a></span><span class="level-item">20 分钟读完 (大约2977个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title title-prefix is-3 is-size-4-mobile">运筹学期末复习</h1><div class="content"><p>可作为复习资料打印</p>
+<h2 id="线性规划问题的单纯形法">线性规划问题的单纯形法</h2>
+<p>线性规划的标准模型，下面给出一个例子</p>
+<p><span class="math display">\[\max z = c_1x_1+c_2x_2+c_3x_3+c_4x_4\]</span></p>
+<p><span class="math display">\[
+\left\{\begin{array}{lr}
+a_{11}x_1+a_{12}x_2+a_{13}x_3+a_{14}x_4=b_1 &amp;\\
+a_{21}x_1+a_{22}x_2+a_{23}x_3+a_{24}x_4=b_2 &amp;\\
+a_{31}x_1+a_{32}x_2+a_{33}x_3+a_{34}x_4=b_3 &amp;\\
+a_{41}x_1+a_{42}x_2+a_{33}x_3+a_{44}x_4=b_4 &amp;\\
+x_1,x_2,x_3,x_4\ge 0
+\end{array}
+\right.
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\vec b\)</span> 需要满足 <span class="math inline">\(\vec b \ge 0\)</span></li>
+</ul>
+<h3 id="单纯形法">单纯形法</h3>
+<p>对于一个线性规划问题如</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r5ZdQf"><img src="https://s3.ax1x.com/2020/12/27/r5ZdQf.png" alt="r5ZdQf.png" /></a></p>
+<p>可以作出以下的单纯形表</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r5Z5mF"><img src="https://s3.ax1x.com/2020/12/27/r5Z5mF.png" alt="r5Z5mF.png" /></a> <strong>注：4800 改为 48000</strong></p>
+<h4 id="单纯形表求解步骤">单纯形表求解步骤</h4>
+<ol start="0" type="1">
+<li>对原问题进行标准化</li>
+<li>找到一个初始可行基<span class="math inline">\(\bar B\)</span>（即对应的系数矩阵为一个单位矩阵）</li>
+<li>求出此时每列变量<span class="math inline">\(x_i\)</span>对应的 <span class="math inline">\(z_j = \sum c_Ba_{ij}\)</span>，<span class="math inline">\(\sigma_j=c_j-z_j\)</span></li>
+<li>当<span class="math inline">\(\exist \sigma_j &gt; 0\)</span>时，说明不是最优解，继续进入第四步，反之结束迭代，进入步骤<code>8.</code></li>
+<li>选出<span class="math inline">\(\max\sigma_j\)</span>，选定该列对应的变量为换入变量</li>
+<li>对于每一行，求得 <span class="math inline">\(\theta=b_j/\max{a_{ij}}\)</span>，其中要求<span class="math inline">\(a_{ij}&gt;0\)</span> 且 对应的列不能是基中的。选出<span class="math inline">\(\min\theta\)</span>对应的一行的变量为换出变量</li>
+<li>用高斯消元法，将对应的换入变量（方括号括中的）化为 1，对应列其余系数化为 0，得到新的表。</li>
+<li>返回 <code>步骤2.</code></li>
+<li>最终解为表左边的基变量，对应的基变量的值为右方的<span class="math inline">\(b\)</span></li>
+</ol>
+<p><strong>有最优解</strong> 非基变量<span class="math inline">\(\sigma_j\le 0\)</span>，基变量 <span class="math inline">\(\sigma_j=0\)</span></p>
+<p><strong>唯一最优解</strong> 有最优解的情况下，所有非基变量的 <span class="math inline">\(\sigma_j&lt;0\)</span></p>
+<p><strong>无穷多最优解</strong> 有最优解的情况下，存在非基变量的 <span class="math inline">\(\sigma_j=0\)</span></p>
+<p><strong>无最优解</strong> 所有的系数 <span class="math inline">\(a_{i,m+k}\le 0\)</span>，且仍有一个非基变量的 <span class="math inline">\(\sigma_j&gt;0\)</span></p>
+<hr />
+<h2 id="线性规划的对偶-p65">线性规划的对偶 P65</h2>
+<p>若原问题为</p>
+<p><span class="math display">\[\max\vec{c}^T\vec x\]</span></p>
+<p><span class="math display">\[
+\left\{\begin{array}{lr}
+    \vec A \vec x\le \vec b &amp;\\
+    \vec x \ge 0
+\end{array}\right.
+\]</span></p>
+<p>则其对应的对偶问题为</p>
+<p><span class="math display">\[\min\vec{b}^T\vec y\]</span></p>
+<p><span class="math display">\[
+\left\{\begin{array}{lr}
+    \vec A^T \vec y\ge \vec c &amp;\\
+    \vec y \ge 0
+\end{array}\right.
+\]</span></p>
+<p>可以得出：原问题的每个不等式对应对偶问题中的一个变量，其具体关系如下表</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r5nmJs"><img src="https://s3.ax1x.com/2020/12/27/r5nmJs.png" alt="r5nmJs.png" /></a></p>
+<h3 id="对偶定理-p68">对偶定理 P68</h3>
+<p>对于一个问题及其对偶问题，有：</p>
+<p><strong>弱对偶定理</strong> 原问题的任意可行解的目标函数值是对偶问题的目标函数值的下界；反之，对偶问题的目标函数值为原问题的目标函数的上界</p>
+<ul>
+<li>即 max 为 min 的下界，min 为 max 的上界</li>
+</ul>
+<p><strong>最优解存在性定理</strong> 若原问题和对偶问题均存在可行解，则它们必定存在最优解</p>
+<p><strong>无界解定理</strong> 若两个问题的都有可行解，且其中一个目标函数无界，则其另一个无可行解</p>
+<p><strong>强对偶定理</strong> 若其中一个有最优解，则另一个也有，且目标函数的值相等</p>
+<p><strong>互补松弛定理（P71）</strong> 将问题化为标准形式，将最优解<span class="math inline">\(\vec x^*\)</span>带入标准型中，求得松弛变量取值，再利用两个等式</p>
+<p><span class="math display">\[\vec y^*\vec x_S = 0\]</span></p>
+<p><span class="math display">\[\vec y_S\vec x^* = 0\]</span></p>
+<p>将求出的值代入对偶问题的标准型，再求出剩下的变量的值。</p>
+<p><strong>对偶单纯形法（P75）</strong> 对于标准形式的线性规划问题（<span class="math inline">\(b\)</span>可小于等于 0），若<span class="math inline">\(b\)</span>中不存在负数，则跳出；反之选择其中绝对值最大的，对应行为出基变量，计算<span class="math inline">\(\sigma_j/a_{ij}, a_{ij}&lt;0\wedge \sigma_j&lt;0\)</span>（如果所有<span class="math inline">\(a_{ij}&gt;0\)</span>，则对偶问题没有可行解）比值最小的列对应变量为入基变量。</p>
+<h3 id="灵敏度分析-p79">灵敏度分析 P79</h3>
+<h4 id="资源系数-vec-b-变化-p80">资源系数 <span class="math inline">\(\vec b\)</span> 变化 P80</h4>
+<p><span class="math inline">\(\vec x = B^{-1}(b+\Delta b)\ge 0\)</span>时，原最优解不变，其中<span class="math inline">\(B^{-1}\)</span> 为原基变量的系数矩阵</p>
+<p><strong>已知资源系数的改变量<span class="math inline">\(\Delta b\)</span></strong> 直接用上式求出新的<span class="math inline">\(b\)</span>，用<em>对偶单纯形法</em>继续迭代。</p>
+<h4 id="价值系数-vec-c-发生变化-p81">价值系数 <span class="math inline">\(\vec c\)</span> 发生变化 P81</h4>
+<p><strong>非基变量</strong> 若要原解不变，只需要对应系数<span class="math inline">\(c_j\)</span>使得<span class="math inline">\(\sigma_j\le0\)</span>即可保持原最优解不变。</p>
+<p><strong>基变量</strong> 需要保证所有非基变量的检验数<span class="math inline">\(\sigma_j\le 0\)</span>。</p>
+<p>如果题中有指出已经发生了变化，将变化的系数带入单纯形表中继续迭代即可。</p>
+<h4 id="技术系数-a-发生变化-p83">技术系数 <span class="math inline">\(A\)</span> 发生变化 P83</h4>
+<p><strong>非基变量</strong> 对于该技术系数对应的列，左乘上一个<span class="math inline">\(C_B\)</span>和原基变量的最终形表矩阵<span class="math inline">\(B^{-1}\)</span>，即<span class="math inline">\(c_BB^{-1}\)</span>，保证对应的<span class="math inline">\(\sigma_j\le 0\)</span>即可保持原最优解不变。</p>
+<p><strong>基变量</strong> 见下表以及 P84 的详细讲解。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r5aO3V"><img src="https://s3.ax1x.com/2020/12/27/r5aO3V.png" alt="r5aO3V.png" /></a></p>
+<hr />
+<h2 id="运输问题-p92">运输问题 P92</h2>
+<h3 id="表上作业法p96">表上作业法（P96）</h3>
+<p>表的每个格中，单位运费写在左上角，右下角若为基变量则写<span class="math inline">\(x_{ij}\)</span>即调用的数目，若为非基变量则写<span class="math inline">\([\sigma_{ij}]\)</span>（对应格的检验数）。</p>
+<p><strong>初始基可行解确定（最小元素法 P99）</strong> 每次选择费用最小的一个格，根据供应量在需求量减去对应的最大值，如果需求量减后为 0，则划去这列；如果对应的供应量减后为 0，则划去这列，反复迭代直到所有的需求都被满足。</p>
+<p><strong>检验最优性（闭回路法） P105</strong> 从一个非基变量格出发，画一个闭回路，要求回路上的其余所有顶点均为基变量，再将各个顶点从起点为 0 开始编号，对应非基变量的检验数<span class="math inline">\(\sigma = 偶数点运价和-奇数点运价和\)</span>，若所有检验数大于等于零，则对应的方案为最优方案。</p>
+<ul>
+<li>无穷多最优解：非基变量检验数为 0</li>
+<li>退化问题
+<ul>
+<li>找基可行解时，导致列和行同时饱和，同时划去这一行和这一列，除了交叉的点以外其余<span class="math inline">\(x\)</span>取 0，导致得到了退化的基可行解</li>
+<li>闭回路法调整时，有多个最小奇数顶点，只能取一个为换出变量，则得到了一个<span class="math inline">\(x_{ij}=0\)</span>的退化解</li>
+</ul></li>
+</ul>
+<h4 id="方案调整-p109">方案调整 P109</h4>
+<ol type="1">
+<li>选取负检验数中的最小者，作为换入变量</li>
+<li>找闭回路并且编号，方法同上</li>
+<li>找出奇数编号顶点中<span class="math inline">\(x\)</span>最小的，作为调整量<span class="math inline">\(\theta\)</span>，作为换出变量</li>
+<li>将回路中所有奇数点减去<span class="math inline">\(\theta\)</span>，偶数点加上<span class="math inline">\(\theta\)</span>，获得新的可行解</li>
+<li>继续检验调整</li>
+</ol>
+<hr />
+<h2 id="指派问题-p129">指派问题 P129</h2>
+<p>已知每个人只能做一个工作，并且已知所有人做某个工作的费用，得到费用矩阵<span class="math inline">\(C\)</span>，需要求使得费用最小（<span class="math inline">\(\min z\)</span>）的解零一矩阵</p>
+<h3 id="匈牙利算法-p132">匈牙利算法 P132</h3>
+<p>对于给定费用矩阵 <span class="math inline">\(C,\quad(n=r(C))\)</span> 的指派问题</p>
+<ol type="1">
+<li>将费用矩阵<span class="math inline">\(C\)</span>每行每列分别减去其对应行/列中的最小元素值得到<span class="math inline">\(C&#39;\)</span></li>
+<li>先逐行检验，若一行中只有一个未标记过或者只有一个没被叉标记的 0 元素，则将其括起，将其所在列的其他未标记 0 元素用叉<code>X</code>划去。重复进行直至每一行都没有被 0 标记或者有 2 个以上没有被标记的 0</li>
+<li>列检验，同理 2.</li>
+<li>将括了的(0)元素对应的解矩阵<span class="math inline">\(X\)</span>中的元素置 1，其余元素置 0</li>
+</ol>
+<p>步骤<code>3</code>结束后有可能会有如下几种情况 <code>P133</code></p>
+<ul>
+<li>每一行都有被括的 0，个数<span class="math inline">\(m=n\)</span>
+<ul>
+<li>跳入步骤<code>4</code></li>
+</ul></li>
+<li>存在未被标记的零元素，但是其对应的行或者列中未被标记过的零元素都至少有两个
+<ul>
+<li>选择 0 元素少的行/列的某个 0 加括号</li>
+<li>用叉划去其他 0 元素，再进行行、列检验</li>
+</ul></li>
+<li>所有 0 均被标记，但是数量小于<span class="math inline">\(n\)</span> <code>P134</code>（此处略过）</li>
+</ul>
+<h3 id="其他指派问题">其他指派问题</h3>
+<p><strong>最大化指派问题 P136</strong> 即需要求<span class="math inline">\(\max z\)</span>，可用矩阵中的最大元素减去矩阵中每个元素得到新矩阵，再使用匈牙利算法求解。</p>
+<p><strong>人数和事件数不等 P137</strong> 增加费用为 0 的人/事件，使用匈牙利算法求解</p>
+<p><strong>一个人可以同时做多件事 P138</strong> 将这个人的费用行复制一遍，再将人数和事件数调整至一致，使用匈牙利算法，求解得到的解矩阵为对应人需要做的多件事。</p>
+<p><strong>某事不能由某人去做</strong> 将这个人做这件事的费用取为一个足够大的 M</p>
+<hr />
+<h2 id="博弈论">博弈论</h2>
+<h3 id="两人有限零和博弈">两人有限零和博弈</h3>
+<p>游戏中有两个博弈者，每人均有有限个博弈策略可选，且两人的得失综合恒为 0。</p>
+<p>博弈者分别有各自的策略集 <span class="math inline">\(S_\alpha=\{\alpha_1,\alpha_2,...,\alpha_n\}\)</span> 和 <span class="math inline">\(S_\beta=\{\beta_1,\beta_2,...,\beta_m\}\)</span>，则有博弈者的支付矩阵</p>
+<p><span class="math display">\[
+A=\begin{bmatrix}
+    \alpha_{11} &amp; ... &amp;\alpha_{1n}\\
+    ... &amp; ... &amp; ...\\
+    \alpha_{m1} &amp; ... &amp;\alpha_{mn}\\
+\end{bmatrix}
+\]</span></p>
+<p>根据博弈者<span class="math inline">\(\alpha\)</span>的支付矩阵，我们可以将该博弈记作 <span class="math inline">\(G=\{S_\alpha,S_\beta;A\}\)</span></p>
+<h4 id="最优纯策略与纳什均衡">最优纯策略与纳什均衡</h4>
+<p>即让自己在的选择在对方从博弈空间中任选博弈时，自己的收益相等。</p>
+<p>例：美女硬币</p>
+<table>
+<thead>
+<tr class="header">
+<th>男/美女</th>
+<th style="text-align: center;">美女正面</th>
+<th style="text-align: center;">美女反面</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>男正面</td>
+<td style="text-align: center;">3 -3</td>
+<td style="text-align: center;">-2 2</td>
+</tr>
+<tr class="even">
+<td>男反面</td>
+<td style="text-align: center;">-2 2</td>
+<td style="text-align: center;">1 -1</td>
+</tr>
+</tbody>
+</table>
+<p>设男出正面的概率为<span class="math inline">\(x\)</span>，反面的概率为<span class="math inline">\(1-x\)</span>；（女出正面的概率为 y，出反面的概率为<span class="math inline">\(1-y\)</span>）。为使利益最大化，应该在对手出正面或反面的时候自己的收益相等（否则，对方就可以针对）：</p>
+<p><span class="math display">\[3x + (-2)\times(1-x)=(-2)\times x + 1\times(1-x)\]</span></p>
+<p>有 <span class="math inline">\(x=3/8\)</span>；收益：<span class="math inline">\(-1/8\)</span>。同理可列方程：</p>
+<p><span class="math display">\[-3y+2(1-y) = 2y + (-1)\times(1-y)\]</span></p>
+<p>有 <span class="math inline">\(y=3/8\)</span>；收益：<span class="math inline">\(1/8\)</span>。</p>
+<h4 id="最优混合策略">最优混合策略</h4>
+<p>博弈者只能以一定的概率在策略集中随机地选择每个策略，则这种概率分布被称为混合策略。</p>
+<p>令<span class="math inline">\(x_i\)</span>，<span class="math inline">\(y_i\)</span>为博弈者<span class="math inline">\(S_\alpha,S_\beta\)</span>在各自策略集中选择<span class="math inline">\(\alpha_i,\beta_i\)</span>的概率，则称<span class="math inline">\(x=(x_1...x_m)\)</span>与<span class="math inline">\(y=(y_1...y_m)\)</span>为两个博弈者的混合策略。</p>
+<p>当<span class="math inline">\(E(x^*,y^*)=v=\min{\max{E(xy)}}=\max{min{E(xy)}}\)</span> 时，称<span class="math inline">\(x^*,y^*\)</span>为博弈人的最优混合策略（若<span class="math inline">\(v&lt;0\)</span>，则需要给收益矩阵每个元素加上<span class="math inline">\(d\)</span>使得<span class="math inline">\(v&gt;0\)</span>）</p>
+<p><strong>最优混合策略求解方法</strong> 可以列出以下两个不等式组</p>
+<p><span class="math display">\[
+\left\{\begin{array}{lr}
+        \sum_{i=1}^m\alpha_{ij}x_i\ge v\qquad j=1,2,...,n &amp;\\
+        \sum_{i=1}^m x_i=1 &amp;\\
+        x_i \ge 0\qquad i=1,2,...,m    \end{array}
+    \right.
+\]</span></p>
+<p><span class="math display">\[
+\left\{
+    \begin{array}{lr}
+        \sum_{j=1}^n\alpha_{ij}y_j\le v\qquad i=1,2,...,m &amp;\\
+        \sum_{j=1}^n y_i=1 &amp;\\
+        y_j \ge 0\qquad j=1,2,...,m    \end{array}\right.
+\]</span></p>
+<p>将等式左右同时<span class="math inline">\(x_i&#39;=\frac{x_i}{v}\)</span>，则可以得到线性规划</p>
+<p><span class="math display">\[ \min S = \sum^m\_{i=1}x_i&#39; \]</span></p>
+<p><span class="math display">\[
+\left\{\begin{array}{lr}
+        \sum_{i=1}^m\alpha_{ij}x_i&#39;\ge v\qquad j=1,2,...,n &amp;\\
+        x_i&#39; \ge 0\qquad i=1,2,...,m    \end{array}\right.
+\]</span></p>
+<p>和</p>
+<p><span class="math display">\[ \min S&#39; = \sum^m\_{i=1}y_i&#39; \]</span></p>
+<p><span class="math display">\[
+\left\{\begin{array}{lr}
+        \sum_{j=1}^n\alpha_{ij}y_i&#39;\le 1\qquad i=1,2,...,m &amp;\\
+        y_i&#39; \ge 0\qquad i=1,2,...,n    \end{array}
+    \right.
+\]</span></p>
+<p>例题，田忌赛马</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/r5TEB4"><img src="https://s3.ax1x.com/2020/12/27/r5TEB4.png" alt="r5TEB4.png" /></a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>运筹学期末复习</p><p><a href="https://hyiker.github.io/2020/12/27/运筹学期末复习/">https://hyiker.github.io/2020/12/27/运筹学期末复习/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Carbene Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-12-27</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-01-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%9C%9F%E6%9C%AB/">期末</a><a class="link-muted mr-2" rel="tag" href="/tags/%E8%BF%90%E7%AD%B9%E5%AD%A6/">运筹学</a></div><!--!--></article></div><!--!--><div class="card"><nav class="post-navigation mt-4 level is-mobile card-content"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2021/01/14/MIPS%E4%BA%94%E6%AE%B5%E6%B5%81%E6%B0%B4%E5%A4%84%E7%90%86%E5%99%A8I-%E9%A1%BA%E5%BA%8F%E5%AE%9E%E7%8E%B0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">MIPS五段流水处理器I 顺序实现</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/12/26/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><span class="level-item">离散数学期末复习</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content" id="valine-thread"></div><script src="//cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread',
+            appId: "r0qA9mbjz4lWX92StwtatUSd-gzGzoHsz",
+            appKey: "eqbjaQHLLgk5yUvAwzm7cFVn",
+            placeholder: "来留言⑧~",
+            
+            avatarForce: false,
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            lang: "zh-CN",
+            visitor: false,
+            highlight: true,
+            recordIP: false,
+            
+            
+            
+            enableQQ: false,
+            requiredFields: [],
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://pic.carbene.cc/i/2024/01/23/65af808bd5f80.webp" alt="Carbene Hu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Carbene Hu</p><p class="is-size-6 is-block">An ordinary guy</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">38</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">66</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Hyiker" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Zhihu" href="https://www.zhihu.com/people/sidice-24"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Academic" href="https://chonghao.carbene.cc"><i class="fas fa-graduation-cap"></i></a></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://wadechiang.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">WadeChiang</span></span><span class="level-right"><span class="level-item tag">wadechiang.github.io</span></span></a></li><li><a class="level is-mobile" href="https://clslaid.icu/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">CL</span></span><span class="level-right"><span class="level-item tag">clslaid.icu</span></span></a></li><li><a class="level is-mobile" href="https://ayamir.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Ayamir</span></span><span class="level-right"><span class="level-item tag">ayamir.github.io</span></span></a></li><li><a class="level is-mobile" href="https://leeshy-tech.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">LeeShy</span></span><span class="level-right"><span class="level-item tag">leeshy-tech.github.io</span></span></a></li><li><a class="level is-mobile" href="https://maxlinn.site/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Maxlinn</span></span><span class="level-right"><span class="level-item tag">maxlinn.site</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2026/01/"><span class="level-start"><span class="level-item">一月 2026</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/12/"><span class="level-start"><span class="level-item">十二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/11/"><span class="level-start"><span class="level-item">十一月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/10/"><span class="level-start"><span class="level-item">十月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/06/"><span class="level-start"><span class="level-item">六月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/05/"><span class="level-start"><span class="level-item">五月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/01/"><span class="level-start"><span class="level-item">一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">八月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div></div><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><!--!--></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a><p class="is-size-7"><span>&copy; 2026 Carbene Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/analytics.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script type="text/javascript" src="/js/imaegoo/universe.js"></script></body></html>

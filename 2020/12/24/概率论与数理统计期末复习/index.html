@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>概率论与数理统计期末复习 - 甲醛的小屋</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Carbene Hu"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Carbene Hu"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="期末之前临时抱佛脚，复习数理统计 数理统计部分 统计量  样本平均值 \[\bar{X}&amp;#x3D;\frac{1}{n}\sum_{i&amp;#x3D;1}^nX_i\] 样本方差 \[S^2 &amp;#x3D; \frac{1}{n-1}\sum_{i&amp;#x3D;1}^n(X_i-\bar{X})^2\] 样本标准差 \[S &amp;#x3D; \sqrt{S^2}\] 样本 k 阶（原点）矩 \[A_k&amp;#x3D;\frac{1}{n}\sum_{i&amp;#x3D;1}^nX^k_"><meta property="og:type" content="blog"><meta property="og:title" content="概率论与数理统计期末复习"><meta property="og:url" content="https://hyiker.github.io/2020/12/24/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><meta property="og:site_name" content="甲醛的小屋"><meta property="og:description" content="期末之前临时抱佛脚，复习数理统计 数理统计部分 统计量  样本平均值 \[\bar{X}&amp;#x3D;\frac{1}{n}\sum_{i&amp;#x3D;1}^nX_i\] 样本方差 \[S^2 &amp;#x3D; \frac{1}{n-1}\sum_{i&amp;#x3D;1}^n(X_i-\bar{X})^2\] 样本标准差 \[S &amp;#x3D; \sqrt{S^2}\] 样本 k 阶（原点）矩 \[A_k&amp;#x3D;\frac{1}{n}\sum_{i&amp;#x3D;1}^nX^k_"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://s3.ax1x.com/2020/12/25/rWnLFI.png"><meta property="article:published_time" content="2020-12-24T18:53:57.000Z"><meta property="article:modified_time" content="2026-01-14T11:16:13.156Z"><meta property="article:author" content="Carbene Hu"><meta property="article:tag" content="数理统计"><meta property="article:tag" content="概率论"><meta property="article:tag" content="期末复习"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://s3.ax1x.com/2020/12/25/rWnLFI.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hyiker.github.io/2020/12/24/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"},"headline":"概率论与数理统计期末复习","image":["https://s3.ax1x.com/2020/12/25/rWnLFI.png"],"datePublished":"2020-12-24T18:53:57.000Z","dateModified":"2026-01-14T11:16:13.156Z","author":{"@type":"Person","name":"Carbene Hu"},"publisher":{"@type":"Organization","name":"甲醛的小屋","logo":{"@type":"ImageObject","url":{"light":"https://s4.ax1x.com/2021/12/30/TR2810.png","dark":"https://s1.ax1x.com/2022/04/03/q7u93t.png"}}},"description":"期末之前临时抱佛脚，复习数理统计 数理统计部分 统计量  样本平均值 \\[\\bar{X}&#x3D;\\frac{1}{n}\\sum_{i&#x3D;1}^nX_i\\] 样本方差 \\[S^2 &#x3D; \\frac{1}{n-1}\\sum_{i&#x3D;1}^n(X_i-\\bar{X})^2\\] 样本标准差 \\[S &#x3D; \\sqrt{S^2}\\] 样本 k 阶（原点）矩 \\[A_k&#x3D;\\frac{1}{n}\\sum_{i&#x3D;1}^nX^k_"}</script><link rel="canonical" href="https://hyiker.github.io/2020/12/24/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><script type="text/javascript" src="/js/imaegoo/night.js"></script><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/resources">Resources</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-12-24T18:53:57.000Z" title="12/24/2020, 6:53:57 PM">2020-12-24</time>发表</span><span class="level-item"><time dateTime="2026-01-14T11:16:13.156Z" title="1/14/2026, 11:16:13 AM">2026-01-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%80%83%E8%AF%95%E8%AE%B0%E5%BD%95/">考试记录</a></span><span class="level-item">8 分钟读完 (大约1142个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title title-prefix is-3 is-size-4-mobile">概率论与数理统计期末复习</h1><div class="content"><p>期末之前临时抱佛脚，复习数理统计</p>
+<h2 id="数理统计部分">数理统计部分</h2>
+<h3 id="统计量">统计量</h3>
+<ol type="1">
+<li><p>样本平均值 <span class="math display">\[\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i\]</span></p></li>
+<li><p>样本方差 <span class="math display">\[S^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2\]</span></p></li>
+<li><p>样本标准差 <span class="math display">\[S = \sqrt{S^2}\]</span></p></li>
+<li><p>样本 k 阶（原点）矩 <span class="math display">\[A_k=\frac{1}{n}\sum_{i=1}^nX^k_i,\quad k=1,2,...;\]</span></p></li>
+<li><p>样本 k 阶中心矩 <span class="math display">\[B_k=\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^k,\quad k=1,2,...;\]</span></p></li>
+</ol>
+<h3 id="重要定理">重要定理</h3>
+<p><strong>Levy-Lindberg 定理</strong> 对于已知期望<span class="math inline">\(E(X_k) = \mu\)</span>、方差<span class="math inline">\(D(X_k)=\sigma^2\)</span>的独立同分布随机变量，有样本均值</p>
+<p><span class="math display">\[\bar{X}\sim N(\mu, \sigma^2/n)\]</span></p>
+<p><strong>Liapunov 中心极限定理</strong> 对于已知期望<span class="math inline">\(E(X_k) = \mu_k\)</span>、方差<span class="math inline">\(D(X_k)=\sigma^2_k\)</span>的独立非同分布随机变量，有样本之和</p>
+<p><span class="math display">\[\sum_{k=1}^nX_k\sim N(\sum_{k=1}^n\mu_k, \sum_{k=1}^n\sigma_k^2)\]</span></p>
+<p>上面两个定理，我们可以将其用于对于之后的样本估计，其核心思想是将未知分布的随机变量的样本当做正态分布来处理。</p>
+<h3 id="重要分布">重要分布</h3>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 32%" />
+<col style="width: 42%" />
+<col style="width: 16%" />
+<col style="width: 2%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>定义</th>
+<th>性质</th>
+<th>数学期望和方差</th>
+<th>对称性</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\chi^2\)</span>分布</td>
+<td><span class="math display">\[\chi^2=\sum_{i=1}^nX_i^2, \quad X_i\sim N(0,1)\]</span></td>
+<td><span class="math display">\[\chi^2_1+\chi^2_2\sim\chi^2(n_1+n_2)\]</span></td>
+<td><span class="math display">\[E(\chi^2)=n,\quad D(\chi^2)=2n\]</span></td>
+<td>非对称</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(t\)</span>分布</td>
+<td><span class="math display">\[t=\frac{X}{\sqrt{Y/n}}, \quad X\sim N(0,1),Y\sim \chi^2(n)\]</span></td>
+<td>上下分位点对称</td>
+<td>无</td>
+<td>对称</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(F\)</span>分布</td>
+<td><span class="math display">\[F=\frac{U/n_1}{V/n_2}, \quad U\sim\chi^2(n_1),V\sim\chi^2(n_2)\]</span></td>
+<td><span class="math display">\[\frac{1}{F}\sim F(n_2,n_1)\]</span> <span class="math display">\[F_{1-\alpha}(n_1,n_2) = \frac{1}{F_\alpha(n_2,n_1)}\]</span></td>
+<td>无</td>
+<td>非对称</td>
+</tr>
+</tbody>
+</table>
+<h3 id="样本的性质">样本的性质</h3>
+<p><strong>四大定理</strong></p>
+<p>对于来自正态总体的样本<span class="math inline">\(X_i\)</span>，其样本均值、方差分别为<span class="math inline">\(\bar{X}\)</span>、<span class="math inline">\(S^2\)</span>，总体的均值为<span class="math inline">\(\mu\)</span>、<span class="math inline">\(\sigma^2\)</span></p>
+<ol type="1">
+<li><p>样本均值的分布</p>
+<p><span class="math display">\[\bar{X}\sim N(\mu,\sigma^2/n)\]</span></p></li>
+<li><p>样本方差的分布</p>
+<ol type="1">
+<li><span class="math inline">\(\frac{(n-1)S^2}{\sigma^2}\sim \chi^2(n-1)\)</span></li>
+<li><span class="math inline">\(\bar{X}\)</span>、<span class="math inline">\(S^2\)</span> 相互独立</li>
+</ol></li>
+<li><p>样本均值、标准差组成的分布</p>
+<p><span class="math display">\[\frac{\bar{X}-\mu}{S/\sqrt{n}}\sim t(n-1)\]</span></p></li>
+<li><p>来自正态的独立样本相关分布</p>
+<p>前置条件，已知有如下的定理成立</p>
+<p><span class="math display">\[\bar{X}-\bar{Y}\sim (\mu_1-\mu_2, \frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2})\]</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(\frac{S^2_1/S^2_2}{\sigma^2_1/\sigma^2_2}\sim F(n_1-1,n_2-1)\)</span></p></li>
+<li><p>若有<span class="math inline">\(\sigma^2_1=\sigma^2_2=\sigma^2\)</span> （整体方差相等）</p>
+<p><span class="math display">\[\frac{(\bar{X}-\bar{Y})-(\mu_1-\mu_2)}{S_w\sqrt{1/n_1+1/n_2}}\sim t(n_1+n_2-2)\]</span></p>
+<p><span class="math display">\[S_w^2=\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}, \quad S_w=\sqrt{S^2_w}\]</span></p></li>
+</ol></li>
+</ol>
+<h3 id="参数估计">参数估计</h3>
+<p>对于已知分布函数的总体<span class="math inline">\(X\)</span>的部分参数的估计。</p>
+<h4 id="点估计">点估计</h4>
+<p>估计值：使用<span class="math inline">\(x_1,x_2,x_3,...,x_n\)</span>表示的参数值</p>
+<p>估计量：使用<span class="math inline">\(X_1,X_2,X_3,...,X_n\)</span>表示的参数值</p>
+<p><strong>矩估计法</strong> 使用样本原点矩对总体参数进行估计，即，使用<span class="math inline">\(A_i\)</span>来替代<span class="math inline">\(E(X^i)\)</span>，代入等式得到参数的估计值。</p>
+<p><strong>极大似然估计法</strong> 对于分布律形如<span class="math inline">\(P\{X=x\}=p(x;\theta)\)</span>的离散型随机变量或者概率密度函数形如<span class="math inline">\(f(x;\theta)\)</span>，令</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/rWnLFI"><img src="https://s3.ax1x.com/2020/12/25/rWnLFI.png" alt="rWnLFI.png" /></a></p>
+<p>则有<span class="math inline">\(\hat{\theta}=argmax L(x_1,x_2,...,x_n,\theta)\)</span></p>
+<p><strong>点估计的无偏性</strong> 对于一个参数<span class="math inline">\(\theta\)</span>的估计量<span class="math inline">\(\hat{\theta}\)</span>，当且仅当<span class="math inline">\(E(\hat{\theta})=\theta\)</span>时，有<span class="math inline">\(\hat{\theta}\)</span>为<span class="math inline">\(\theta\)</span>的无偏估计。</p>
+<h4 id="区间估计">区间估计</h4>
+<p>对于分布函数为<span class="math inline">\(F(x;\theta)\)</span>的随机变量总体<span class="math inline">\(X\)</span>，若存在</p>
+<p>​ <span class="math display">\[P\{\underline{\theta}(X_1,X_2,...,X_n)&lt;\theta&lt;\bar{\theta}(X_1,X_2,...,X_n)\}\ge1-\alpha\]</span></p>
+<p>则称 <span class="math inline">\(\underline \theta\)</span> 和 <span class="math inline">\(\bar \theta\)</span> 为 <span class="math inline">\(\theta\)</span> 的<strong>置信水平</strong>为 <span class="math inline">\(1-\alpha\)</span> 的<strong>置信下限</strong>和<strong>置信上限</strong>。</p>
+<p><strong>题目做法</strong> 首先找到参数的一个<strong>无偏估计</strong>，然后运用此无偏估计和参数构造<strong>枢轴量</strong>（不依赖于未知参数的服从已知分布的随机变量），使用该枢轴量得到对应的未知参数的置信区间（参考 P161 例 1）。</p>
+<h5 id="单个正态总体的估计">单个正态总体的估计</h5>
+<p>正态总体 <span class="math inline">\(X\sim N(\mu,\sigma^2)\)</span>，置信水平<span class="math inline">\(1-\alpha\)</span></p>
+<p><strong><em><span class="math inline">\(\mu\)</span>的置信区间</em></strong></p>
+<p><strong><span class="math inline">\(\sigma\)</span>已知</strong> 置信区间为 <span class="math inline">\((\bar{X}\pm \frac{\sigma}{\sqrt{n}}z_{\alpha/2})\)</span> （<span class="math inline">\(z_{\alpha/2}\)</span>为标准正态的上<span class="math inline">\(\alpha/2\)</span>分位点）</p>
+<p><strong><span class="math inline">\(\sigma\)</span>未知</strong> 置信区间为<span class="math inline">\((\bar X \pm \frac{S}{\sqrt{n}}t_{\alpha/2}(n-1))\)</span></p>
+<p><strong><em><span class="math inline">\(\sigma^2\)</span>的置信区间</em></strong></p>
+<p><span class="math display">\[(\frac{\sqrt{n-1}S}{\sqrt{\chi^2_{\alpha/2}(n-1)}},\frac{\sqrt{n-1}S}{\sqrt{\chi^2_{1-\alpha/2}(n-1)}})\]</span></p>
+<h5 id="两个正态总体">两个正态总体</h5>
+<p>正态总体 <span class="math inline">\(X_i\sim N(\mu_i,\sigma_i^2)\)</span>，置信水平<span class="math inline">\(1-\alpha\)</span></p>
+<p><strong><em><span class="math inline">\(\mu_1-\mu_2\)</span>的置信区间</em></strong></p>
+<p><span class="math display">\[(\bar{X_1}-\bar{X_2}\pm t_{\alpha/2}(n_1+n_2-2)S_w\sqrt{\frac{1}{n_1}+\frac{1}{n_2}})\]</span></p>
+<p>其中<span class="math inline">\(S_w\)</span>的定义和前文相同。</p>
+<p><strong><em><span class="math inline">\(\sigma_1^2/\sigma_2^2\)</span>的置信区间</em></strong></p>
+<p><span class="math display">\[(\frac{S_1^2}{S_2^2}\frac{1}{F_{\alpha/2}(n_1-1,n_2-1)},\frac{S_1^2}{S_2^2}\frac{1}{F_{1-\alpha/2}(n_1-1,n_2-1)})\]</span></p>
+<h3 id="假设检验">假设检验</h3>
+<p>P189，表 8-1</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>概率论与数理统计期末复习</p><p><a href="https://hyiker.github.io/2020/12/24/概率论与数理统计期末复习/">https://hyiker.github.io/2020/12/24/概率论与数理统计期末复习/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Carbene Hu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-12-24</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2026-01-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/">数理统计</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">概率论</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a></div><!--!--></article></div><!--!--><div class="card"><nav class="post-navigation mt-4 level is-mobile card-content"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/12/26/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">离散数学期末复习</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/12/24/CSAPP%E8%80%83%E8%AF%95%E6%80%BB%E7%BB%93/"><span class="level-item">北邮计算机系统基础 (CSAPP) 期末考试总结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content" id="valine-thread"></div><script src="//cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.4.16/dist/Valine.min.js"></script><script>new Valine({
+            el: '#valine-thread',
+            appId: "r0qA9mbjz4lWX92StwtatUSd-gzGzoHsz",
+            appKey: "eqbjaQHLLgk5yUvAwzm7cFVn",
+            placeholder: "来留言⑧~",
+            
+            avatarForce: false,
+            meta: ["nick","mail","link"],
+            pageSize: 10,
+            lang: "zh-CN",
+            visitor: false,
+            highlight: true,
+            recordIP: false,
+            
+            
+            
+            enableQQ: false,
+            requiredFields: [],
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://pic.carbene.cc/i/2024/01/23/65af808bd5f80.webp" alt="Carbene Hu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Carbene Hu</p><p class="is-size-6 is-block">An ordinary guy</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing, China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">38</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">66</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Hyiker" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Zhihu" href="https://www.zhihu.com/people/sidice-24"><i class="fab fa-zhihu"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Academic" href="https://chonghao.carbene.cc"><i class="fas fa-graduation-cap"></i></a></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://wadechiang.github.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">WadeChiang</span></span><span class="level-right"><span class="level-item tag">wadechiang.github.io</span></span></a></li><li><a class="level is-mobile" href="https://clslaid.icu/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">CL</span></span><span class="level-right"><span class="level-item tag">clslaid.icu</span></span></a></li><li><a class="level is-mobile" href="https://ayamir.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Ayamir</span></span><span class="level-right"><span class="level-item tag">ayamir.github.io</span></span></a></li><li><a class="level is-mobile" href="https://leeshy-tech.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">LeeShy</span></span><span class="level-right"><span class="level-item tag">leeshy-tech.github.io</span></span></a></li><li><a class="level is-mobile" href="https://maxlinn.site/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Maxlinn</span></span><span class="level-right"><span class="level-item tag">maxlinn.site</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2026/01/"><span class="level-start"><span class="level-item">一月 2026</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/12/"><span class="level-start"><span class="level-item">十二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/11/"><span class="level-start"><span class="level-item">十一月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/10/"><span class="level-start"><span class="level-item">十月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/06/"><span class="level-start"><span class="level-item">六月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/05/"><span class="level-start"><span class="level-item">五月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/01/"><span class="level-start"><span class="level-item">一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">八月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/09/"><span class="level-start"><span class="level-item">九月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div></div><div class="column column-right is-4-tablet is-4-desktop is-4-widescreen  order-3 is-sticky"><!--!--></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="https://s4.ax1x.com/2021/12/30/TR2810.png" alt="甲醛的小屋" height="28"><img class="logo-img-dark" src="https://s1.ax1x.com/2022/04/03/q7u93t.png" alt="甲醛的小屋" height="28"></a><p class="is-size-7"><span>&copy; 2026 Carbene Hu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Follow me on GitHub" href="https://github.com/Hyiker"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/analytics.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script type="text/javascript" src="/js/imaegoo/universe.js"></script></body></html>
